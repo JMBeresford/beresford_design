@@ -1,0 +1,198 @@
+:root {
+  --dark: #1D1E20;
+  --light: #D3CAC9;
+  --accent-red: #DE1A40;
+  --accent-gold: #CBC08E;
+  --accent-green: #2C656E;
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  background-color: var(--dark);
+  color: var(--light);
+  font-family: 'Montserrat',sans-serif;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#header {
+  display: flex;
+  padding: 0 3em;
+  align-items: center;
+}
+
+#brand {
+  width: 400px;
+}
+
+.nav-item {
+  display: inline-block;
+  position: relative;
+  font-weight: 200;
+  margin-left: 5em;
+  font-size: 2em;
+}
+
+.nav-item::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--light);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.nav-item:hover::before {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+#nav-right {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#content {
+  margin: 3em 7% 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#slider-div {
+  display: flex;
+  align-items: center;
+  margin-left: 10%;
+}
+
+#moon {
+  height: 15px;
+}
+
+#sun {
+  height: 19px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 20px;
+  border: 2px solid var(--light);
+  border-radius: 16px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: none;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  left: 2px;
+  bottom: 2px;
+  background-color: var(--light);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(22px);
+  -ms-transform: translateX(22px);
+  transform: translateX(22px);
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+#rectangle-div {
+  margin-top: 2em;
+  opacity: 0.9;
+}
+
+#cta {
+  width: 55%;
+  display: block;
+}
+
+#cta-text {
+  font-size: 6em;
+  font-weight: 300;
+  margin-bottom: 1em;
+}
+
+#button-div {
+  display: inline-block;
+}
+
+#cta-button-underlay {
+  position: absolute;
+
+  font-size: 1.5em;
+  font-weight: 400;
+  border-radius: 10px;
+  display: inline-block;
+  background-color: var(--accent-red);
+  padding: 20px 40px;
+}
+
+#cta-button {
+
+  font-size: 1.5em;
+  font-weight: 400;
+  border-radius: 10px;
+  display: inline-block;
+  color: var(--accent-red);
+  background-color: var(--light);
+  padding: 20px 40px;
+
+  clip-path: circle(0% at 50% 50%);
+  transition: all 0.2s ease-out;
+}
+
+#button-div:hover #cta-button {
+  clip-path: circle(100% at 50% 50%);
+}
+
+#illustration {
+  width: 45%;
+  display: block;
+}
