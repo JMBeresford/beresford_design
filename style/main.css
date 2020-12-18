@@ -60,6 +60,15 @@ body {
   margin: 0 2em;
 }
 
+#watermark {
+  position: absolute;
+  top: 100%;
+  left: 100%;
+  max-width: 500px;
+
+  transform: translate(-95%, -80%)  scale(0.8,0.8);
+}
+
 .nav-item {
   align-self: center;
   display: inline-block;
@@ -235,7 +244,7 @@ input:checked + .slider:before {
 }
 
 #screen, #reflection {
-  animation-duration: 5s;
+  animation-duration: 3s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
   animation-timing-function: ease-in-out;
@@ -294,6 +303,10 @@ input:checked + .slider:before {
 
   #header-mobile {
     display: flex;
+  }
+
+  #watermark {
+    display: none;
   }
 
   #illustration {
