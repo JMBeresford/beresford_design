@@ -1,21 +1,29 @@
 const close_btn = document.querySelector('#close');
-const find_yours_btn = document.querySelector('#button-div');
+const find_yours_btn = document.querySelector('#cta-button');
 const contact_btn = document.querySelector('#contact-us');
+const brightness_mode = document.getElementById('dark-mode');
+const modal_bg = document.getElementById('contact-wrapper');
+const modal = document.getElementById('contact');
 
-close_btn.addEventListener('click', () => {
-  const el = document.querySelector('#contact-wrapper');
+function addContactAnimation() {
+  document.querySelector('#contact-wrapper').classList.add("animate");
+  document.querySelector('#contact').classList.add("animate");
+}
 
-  el.style.display = 'none';
-});
+function removeContactAnimation() {
+  document.querySelector('#contact-wrapper').classList.remove("animate");
+  document.querySelector('#contact').classList.remove("animate");
+}
 
-find_yours_btn.addEventListener('click', () => {
-  const el = document.querySelector('#contact-wrapper');
+close_btn.addEventListener('click', removeContactAnimation);
+modal_bg.addEventListener('click', removeContactAnimation);
+contact_btn.addEventListener('click', addContactAnimation);
+find_yours_btn.addEventListener('click', addContactAnimation);
 
-  el.style.display = 'block';
-});
+modal.addEventListener('click', (e) => {
+  e.stopPropagation();
+})
 
-contact_btn.addEventListener('click', () => {
-  const el = document.querySelector('#contact-wrapper');
-
-  el.style.display = 'block';
+brightness_mode.addEventListener('click', () => {
+  document.body.classList.toggle("dark");
 });
