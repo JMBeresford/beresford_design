@@ -11,6 +11,36 @@
   --light: #1D1E20;
 }
 
+particle {
+  position: absolute;
+  display: block;
+  background-color: transparent;
+  border-radius: 100%;
+
+  opacity: 0.4;
+}
+
+particle::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #D3CAC9;
+  transform: translateX(100%);
+
+  animation-name: particle-move;
+  animation-timing-function: linear;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+@keyframes particle-move {
+  to {
+    transform: translateX(-200%);
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -19,8 +49,11 @@
 
 body, html {
   height: 100%;
-  overflow: hidden;
   font-size: 16px;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 a {
@@ -28,10 +61,18 @@ a {
   color: inherit;
 }
 
+html, body * {
+  overflow: hidden;
+}
+
 body {
   background-color: var(--light);
   color: var(--dark);
   font-family: 'Montserrat',sans-serif;
+  scrollbar-width: none;
+
+  overflow: scroll;
+  scroll-snap-type: y mandatory;
 }
 
 svg path, svg rect, svg circle {
@@ -47,13 +88,20 @@ body.dark #close line {
 }
 
 .container {
-  height: 100%;
+  scroll-snap-align: start;
+  padding-top: 10%;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: visible;
 }
 
 #contact-wrapper {
   position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,6 +132,9 @@ body.dark #close line {
   color: var(--dark);
   min-width: 50%;
   min-height: 55%;
+  max-width: 60%;
+  max-height: 80%;
+
   z-index: 501;
   padding: auto;
 
@@ -116,31 +167,143 @@ body.dark #close line {
 
 #close {
   align-self: flex-end;
-  width: 20px;
   cursor: pointer;
+  padding: 0 8%;
+}
+
+#close svg {
+  min-width: 20px;
 }
 
 #contact-left, #contact-right {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   width: 50%;
   flex-grow: 1;
-  padding: 1em 2em 2em;
-  justify-content: space-between;
 }
 
 #contact-left {
   background-color: var(--light);
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: 2rem 0.5rem 2rem 1rem;
 }
 
 #contact-right {
   background-color: var(--dark);
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  color: inherit;
+  color: #D3CAC9;
+  padding: 2rem 1rem 2rem 0.5rem;
+  justify-content: space-between;
+}
+
+#right-content {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 0 8%;
+  line-height: 2rem;
+}
+
+#right-content path {
+  fill: var(--accent-gold);
+}
+
+#contact-right-head {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  letter-spacing: 0.1rem;
+}
+
+.contact-right-subhead {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+
+.contact-right-subsubhead {
+  color: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  margin-bottom: 0.1rem;
+}
+
+#our-info svg {
+  margin-right: 1rem;
+}
+
+#particles {
+  position: relative;
+  flex-grow: 1;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#airplane-wrapper {
+  transform: translateX(-10%);
+  animation-name: velocity;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-direction: alternate;
+}
+
+@keyframes velocity {
+  0% {
+    transform: translateX(-10%);
+  }
+
+  100% {
+    transform: translateX(10%);
+  }
+}
+
+#airplane-wrapper2 {
+  transform: translateY(-30%);
+  animation-name: altitude;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-direction: alternate;
+}
+
+@keyframes altitude {
+  0% {
+    transform: translateY(-30%);
+  }
+
+  100% {
+    transform: translateY(30%);
+  }
+}
+
+#airplane {
+  max-width: 40%;
+  min-width: 150px;
+  transform: rotateZ(0deg);
+
+  animation-name: dip;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes dip {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  100% {
+    transform: rotateZ(15deg);
+  }
 }
 
 body.dark #contact-right {
@@ -174,9 +337,18 @@ body.dark .form-div label {
   border-radius: 5px;
   background-color: var(--light);
   border: solid 1px #aca4a3;
-  color: var(--dark);
   margin: 0.4em 0 1.5em;
   padding: 0.25em 1em;
+
+  color: var(--dark);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 1pt #888180;
 }
 
 body.dark .form-div input, body.dark .form-div textarea {
@@ -188,6 +360,7 @@ body.dark .form-div input, body.dark .form-div textarea {
   align-self: flex-start;
   width: 100%;
   margin: 0 0 1em -1px;
+  letter-spacing: 0.1rem;
 }
 
 body.dark #contact-head {
@@ -211,16 +384,22 @@ body.dark #contact-head {
 }
 
 #header {
+  top: 0;
+  left: 0;
+  width: 100%;
+  position: fixed;
+  z-index: 400;
   display: flex;
   padding: 0;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 3em;
+  overflow: visible;
 }
 
 #header-bg {
   display: block;
   max-width: 1200px;
+  min-width: 60%;
   position: absolute;
 }
 
@@ -234,6 +413,7 @@ body.dark #contact-head {
   top: 100%;
   left: 100%;
   max-width: 500px;
+  width: 30%;
   z-index: 35;
 
   transform: translate(-95%, -80%)  scale(0.8,0.8);
@@ -253,11 +433,11 @@ body.dark #contact-head {
   content: '';
   position: absolute;
   width: 100%;
-  transform: scaleX(0);
   height: 1px;
   bottom: 0;
   left: 0;
   background-color: #D3CAC9;
+  transform: scaleX(0);
   transform-origin: bottom right;
   transition: transform 0.25s ease-out;
 }
@@ -367,6 +547,7 @@ input:checked + .slider:before {
 
 .button-div {
   display: inline-block;
+  position: relative;
 }
 
 .button-underlay {
@@ -399,7 +580,7 @@ body.dark .button-underlay {
   border: solid 2px var(--dark);
 
   clip-path: circle(0% at 50% 50%);
-  transition: all 0.2s ease-in-out;
+  transition: clip-path 0.2s ease-in-out;
 }
 
 body.dark .button {
@@ -411,6 +592,7 @@ body.dark .button {
 }
 
 #illustration {
+  overflow: visible;
   width: 45%;
   display: grid;
   grid-template-rows: 1fr;

@@ -1,4 +1,4 @@
-const close_btn = document.querySelector('#close');
+const close_btn = document.querySelector('#close-btn');
 const find_yours_btn = document.querySelector('#cta-button');
 const contact_btn = document.querySelector('#contact-us');
 const brightness_mode = document.getElementById('dark-mode');
