@@ -27,3 +27,11 @@ modal.addEventListener('click', (e) => {
 brightness_mode.addEventListener('click', () => {
   document.body.classList.toggle("dark");
 });
+
+document.addEventListener('scroll', (e) => {
+  if (window.scrollY > 100) {
+    document.getElementById('nav-right').classList.add('scrolled');
+  } else {
+    document.getElementById('nav-right').classList.remove('scrolled');
+  } 
+});
