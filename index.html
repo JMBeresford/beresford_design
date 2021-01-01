@@ -17,26 +17,26 @@
         <div id="contact-left">
           <h1 id="contact-head">Get In Touch</h1>
           <div id="contact-form">
-            <form id="contact-form" name="contact" action="/" data-netlify="true">
+            <form id="contact-form" name="contact" method="POST" data-netlify="true">
 
               <div class="form-div">
                 <label id="name-label" for="name">Name:</label><br>
-                <input type="text" id="name"><br>
+                <input type="text" id="name" name="name"><br>
               </div>
               
               <div class="form-div">
                 <label for="email">Email:</label><br>
-                <input type="text" id="email"><br>
+                <input type="text" id="email" name="email"><br>
               </div>
               
               <div class="form-div">
                 <label for="phone">Phone:</label><br>
-                <input type="text" id="phone" value="760 799 3498"><br>
+                <input type="text" id="phone" name="phone"><br>
               </div>
               
               <div class="form-div">
                 <label for="message">Message:</label><br>
-                <textarea name="" id="message"></textarea><br>
+                <textarea name="message" id="message"></textarea><br>
               </div>
   
               <div id="contact-btn" class="button-div">
