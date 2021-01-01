@@ -6,6 +6,19 @@ const modal_bg = document.getElementById('contact-wrapper');
 const modal = document.getElementById('contact');
 const send_btn = document.getElementById('contact-btn');
 
+
+const handleSubmit = (e) => {
+  e.preventDefault()
+  let myForm = document.getElementById('contact-form');
+  let formData = new FormData(myForm)
+  fetch('/', {
+    method: 'POST',
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams(formData).toString()
+  }).then(() => console.log('Form successfully submitted')).catch((error) =>
+  alert(error))
+}
+
 function addContactAnimation() {
   document.querySelector('#contact-wrapper').classList.add("animate");
   document.querySelector('#contact').classList.add("animate");
@@ -22,6 +35,7 @@ function sendContact() {
   document.querySelector('#contact').classList.remove("animate");
 }
 
+document.querySelector("form").addEventListener("submit", handleSubmit);
 close_btn.addEventListener('click', removeContactAnimation);
 modal_bg.addEventListener('click', removeContactAnimation);
 send_btn.addEventListener('click', sendContact);
