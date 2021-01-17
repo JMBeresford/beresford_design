@@ -51,6 +51,14 @@ body.dark #close line {
   stroke: var(--dark);
 }
 
+#close2 {
+  display: none;
+}
+
+#close2 line {
+  stroke: var(--alt-dark);
+}
+
 .nav-item.under-construction {
   overflow: visible;
   cursor: default;
@@ -158,13 +166,13 @@ body.dark #close line {
   align-items: stretch;
 }
 
-#close {
+#close, #close2 {
   align-self: flex-end;
   cursor: pointer;
   padding: 0 8%;
 }
 
-#close svg {
+#close svg, #close2 svg {
   min-width: 20px;
 }
 
@@ -361,7 +369,7 @@ body.dark #contact-head {
 }
 
 #message {
-  min-height: 120px;
+  min-height: 60px;
 }
 
 #header-mobile {
@@ -377,8 +385,16 @@ body.dark #contact-head {
   width: 100vw;
   -webkit-backdrop-filter: blur(40px);
   backdrop-filter: blur(40px);
-  background-color: #D3CAC966;
+  background-color: #1D1E20;
   color: var(--dark);
+}
+
+#header-mobile .nav-item {
+  color: #D3CAC9;
+  margin: 0;
+  padding: 3px 10px;
+  border: solid 1px #D3CAC9;
+  border-radius: 5px;
 }
 
 #mobile-logo {
@@ -802,6 +818,14 @@ body.dark .button {
     display: none;
   }
 
+  #close2 {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    padding: 0;
+  }
+
   #header-mobile {
     display: flex;
   }
@@ -841,9 +865,11 @@ body.dark .button {
   }
 
   #contact-left {
+    position: relative;
     border-radius: 10px;
     align-items: stretch;
     text-align: center;
+    padding-top: 10%;
   }
 
   #contact-wrapper {
@@ -896,6 +922,10 @@ body.dark .button {
     flex-direction: column;
     width: 100%;
     align-items: stretch;
+  }
+
+  #contact-btn {
+    margin-top: 0;
   }
 
   .form-div {
