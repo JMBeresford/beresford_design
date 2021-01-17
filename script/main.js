@@ -5,6 +5,7 @@ const brightness_mode = document.getElementById('dark-mode');
 const modal_bg = document.getElementById('contact-wrapper');
 const modal = document.getElementById('contact');
 const send_btn = document.getElementById('contact-btn');
+const mobile_contact_btn = document.getElementById('mobileContactBtn');
 
 
 const handleSubmit = (e) => {
@@ -40,6 +41,7 @@ close_btn.addEventListener('click', removeContactAnimation);
 modal_bg.addEventListener('click', removeContactAnimation);
 send_btn.addEventListener('click', sendContact);
 contact_btn.addEventListener('click', addContactAnimation);
+mobile_contact_btn.addEventListener('click', addContactAnimation);
 find_yours_btn.addEventListener('click', addContactAnimation);
 
 modal.addEventListener('click', (e) => {
