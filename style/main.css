@@ -51,6 +51,11 @@ body.dark #close line {
   stroke: var(--dark);
 }
 
+.close {
+  width: 20px;
+  height: 20px;
+}
+
 #close2 {
   display: none;
 }
