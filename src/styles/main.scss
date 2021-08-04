@@ -1,0 +1,16 @@
+@use "./colors" as *;
+
+// sub-modules
+@use './pages/index';
+
+* {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $primary;
+  color: $secondary;
+}
