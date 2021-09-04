@@ -59,7 +59,7 @@ export default function Model(props) {
   bakedTex8.flipY = false;
 
   const group = useRef();
-  const { nodes, materials } = useGLTF('/beresford_design.glb');
+  const { nodes, materials } = useGLTF('beresford_design.glb');
   const screenColor = 0xf1f6f9;
 
   return (
