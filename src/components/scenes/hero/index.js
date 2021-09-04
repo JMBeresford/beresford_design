@@ -1,7 +1,5 @@
-import React, { useLayoutEffect, Suspense } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Color, sRGBEncoding } from 'three';
-import { Box } from '@react-three/drei';
+import React, { Suspense } from 'react';
+import { Canvas } from '@react-three/fiber';
 import Model from './Beresford_design';
 
 const Hero = () => {
