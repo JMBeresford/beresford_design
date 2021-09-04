@@ -1,7 +1,7 @@
 @use "./colors" as *;
 
 // sub-modules
-@use './pages/index';
+@use './index/index';
 
 * {
   margin: 0;
@@ -13,4 +13,36 @@
 body {
   background-color: $primary;
   color: $secondary;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 10vh;
+  width: 100%;
+
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
+
+  nav {
+    width: 40%;
+
+    ul {
+      display: flex;
+      list-style: none;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      font-weight: medium;
+
+      li {
+        cursor: pointer;
+      }
+    }
+  }
 }

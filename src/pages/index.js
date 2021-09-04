@@ -1,14 +1,17 @@
 import * as React from 'react';
 import '../styles/main.scss';
+import Header from '../components/header';
+import Hero from '../components/scenes/hero';
 
 // markup
 const IndexPage = () => {
   return (
-    <main id='hero'>
-      <h1>
-        Stand out from the competition with a bespoke digital masterpiece.
-      </h1>
-    </main>
+    <div id='index'>
+      <Header />
+      <main id='hero'>
+        <Hero />
+      </main>
+    </div>
   );
 };
 

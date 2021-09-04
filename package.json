@@ -8,7 +8,7 @@
     "gatsby"
   ],
   "scripts": {
-    "develop": "gatsby develop",
+    "develop": "gatsby develop -H 0.0.0.0",
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
@@ -17,17 +17,20 @@
   "dependencies": {
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
+    "@react-three/drei": "^7.3.1",
     "@react-three/fiber": "^7.0.6",
     "gatsby": "^3.10.2",
     "gatsby-plugin-image": "^1.11.0",
     "gatsby-plugin-mdx": "^2.11.0",
     "gatsby-plugin-sass": "^4.11.0",
     "gatsby-plugin-sharp": "^3.11.0",
+    "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-source-filesystem": "^3.11.0",
     "gatsby-transformer-sharp": "^3.11.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "sass": "^1.37.5",
-    "three": "^0.131.3"
+    "three": "^0.131.3",
+    "tweakpane": "^3.0.5"
   }
 }
