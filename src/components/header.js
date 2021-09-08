@@ -1,15 +1,17 @@
 import React from 'react';
 
-const Header = () => {
+const Header = (props) => {
   return (
     <header>
-      <h2>beresford design</h2>
+      <h2 onClick={props.handleInteract} onWheel={props.handleInteract}>
+        beresford design
+      </h2>
 
       <nav>
         <ul>
-          <li>about</li>
-          <li>contact</li>
-          <li>works</li>
+          <li onClick={props.handleInteract}>about</li>
+          <li onClick={props.handleInteract}>contact</li>
+          <li onClick={props.handleInteract}>works</li>
         </ul>
       </nav>
     </header>
