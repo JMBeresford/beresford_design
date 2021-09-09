@@ -27,7 +27,6 @@ const Scene = (props) => {
         id='heroCanvas'
         dpr={Math.min(pixelRatio, 2)}
         gl={{ alpha: false }}
-        camera={{ position: [0.34019, 1.12988, -0.72], fov: 75 }}
       >
         <Suspense fallback={null}>
           <Model

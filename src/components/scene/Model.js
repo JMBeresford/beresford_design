@@ -41,6 +41,11 @@ export default function Model({ data, isLoaded, interacted, ...props }) {
   // STATE
   const [view, setView] = useState('landing');
   const [target, setTarget] = useState({ x: 0.34019, y: 1.12988, z: -0.91913 });
+  const [position, setPosition] = useState({
+    x: 0.34019,
+    y: 1.12988,
+    z: -0.72,
+  });
   const [moving, setMoving] = useState(false);
 
   // LOAD TEXTURES AND CONFIG MATERIALS
@@ -175,6 +180,7 @@ export default function Model({ data, isLoaded, interacted, ...props }) {
     let newTarget = views[newView].target;
 
     let tempTarget = target;
+    let tempPosition = position;
 
     gsap.to(tempTarget, {
       duration: 3,
@@ -187,7 +193,7 @@ export default function Model({ data, isLoaded, interacted, ...props }) {
       },
     });
 
-    gsap.to(myCamera.position, {
+    gsap.to(tempPosition, {
       onStart: () => {
         setMoving(true);
       },
@@ -199,6 +205,9 @@ export default function Model({ data, isLoaded, interacted, ...props }) {
       x: newPosition.x,
       y: newPosition.y,
       z: newPosition.z,
+      onUpdate: () => {
+        setPosition(tempPosition);
+      },
       ease: Power3.easeInOut,
     });
   };
@@ -221,8 +230,11 @@ export default function Model({ data, isLoaded, interacted, ...props }) {
       let y = target.y + 0.1 * mouse.y;
 
       myCamera.lookAt(x, y, target.z);
+      myCamera.position.x = position.x - mouse.x * 0.05;
+      myCamera.position.y = position.y - mouse.y * 0.05;
     } else {
       myCamera.lookAt(target.x, target.y, target.z);
+      myCamera.position.set(position.x, position.y, position.z);
     }
   });
 
