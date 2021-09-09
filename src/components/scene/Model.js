@@ -13,10 +13,6 @@ export default function Model({ data, isLoaded, interacted, ...props }) {
   // DEBUG
   const pane = new Pane();
 
-  const debug = {
-    camLock: false,
-  };
-
   const f = pane.addFolder({
     title: 'Debug',
     expanded: false,
@@ -225,7 +221,7 @@ export default function Model({ data, isLoaded, interacted, ...props }) {
   }, [interacted, changeView]);
 
   useFrame(({ mouse }) => {
-    if (view !== 'landing' && !moving && !debug.camLock) {
+    if (view !== 'landing' && !moving) {
       let x = target.x + 0.1 * mouse.x;
       let y = target.y + 0.1 * mouse.y;
 
