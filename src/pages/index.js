@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import '../styles/main.scss';
 import Scene from '../components/scene/';
 import { graphql, useStaticQuery } from 'gatsby';

@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: 'https://www.beresford-design.com',
-    title: 'Beresford Design',
+    siteUrl: 'https://www.beresforddesign.net',
+    title: 'UNDER CONSTRUCTION',
   },
   plugins: [
     'gatsby-plugin-sass',
