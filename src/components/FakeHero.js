@@ -2,8 +2,9 @@ import React from 'react';
 import Header from './Header';
 import { useStaticQuery, graphql } from 'gatsby';
 import gsap from 'gsap/all';
+import useStore from './scene/store';
 
-const FakeHero = (props) => {
+const FakeHero = () => {
   const data = useStaticQuery(graphql`
     query {
       logo: file(relativePath: { eq: "logo.svg" }) {
@@ -12,11 +13,16 @@ const FakeHero = (props) => {
     }
   `);
 
+  const [experienceStarted, startExperience] = useStore((state) => [
+    state.experienceStarted,
+    state.startExperience,
+  ]);
+
   const delayInteractionUpdate = () => {
     gsap.to('#fakeHero', {
       opacity: 0,
       duration: 1,
-      onComplete: props.handleInteract,
+      onComplete: startExperience,
     });
   };
 
@@ -24,7 +30,7 @@ const FakeHero = (props) => {
     <div
       id='fakeHero'
       onWheel={delayInteractionUpdate}
-      style={props.interacted ? { pointerEvents: 'none' } : {}}
+      style={experienceStarted ? { display: 'none' } : {}}
     >
       <Header handleInteract={delayInteractionUpdate} />
       <main>

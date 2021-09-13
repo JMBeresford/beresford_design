@@ -56,12 +56,28 @@ const IndexPage = () => {
           }
         }
       }
+      logo: file(relativePath: { eq: "logo_transparent.png" }) {
+        childImageSharp {
+          fixed(height: 500, width: 491, quality: 100, jpegQuality: 100) {
+            src
+          }
+        }
+      }
     }
   `);
 
+  const handlePointerMove = (e) => {
+    let el = document.querySelector('.cursor');
+
+    if (el !== null) {
+      document.querySelector('.cursor').style.top = `${e.clientY}px`;
+      document.querySelector('.cursor').style.left = `${e.clientX}px`;
+    }
+  };
+
   return (
     <div id='index'>
-      <main id='hero'>
+      <main id='hero' onPointerMove={handlePointerMove}>
         <Scene query={query} />
       </main>
     </div>
