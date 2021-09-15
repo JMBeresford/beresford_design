@@ -37,6 +37,11 @@ const Scene = (props) => {
                 setView('main');
               }
             }}
+            onWheel={() => {
+              if (!hovering && experienceStarted) {
+                setView('main');
+              }
+            }}
             data={props.query}
           />
         </Suspense>

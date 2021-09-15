@@ -17,6 +17,7 @@ export default function Model({ data, ...props }) {
   const setHovering = useStore((state) => state.setHovering);
   const setView = useStore((state) => state.setView);
   const view = useStore((state) => state.view);
+  const moving = useStore((state) => state.moving);
   const experienceStarted = useStore((state) => state.experienceStarted);
 
   // LOAD TEXTURES AND CONFIG MATERIALS
@@ -43,13 +44,13 @@ export default function Model({ data, ...props }) {
   logoTex.center.set(0.5, 0.5);
   logoTex.repeat.set(1.6, 1.6);
   monitorTex.center.set(0.5, 0.5);
-  monitorTex.repeat.set(1.8, 1.8);
+  monitorTex.repeat.set(2.2, 2.2);
 
   const emissionColors = {
-    email: '#fffdbd',
-    instagram: '#e0afff',
-    linkedIn: '#a4d6ff',
-    github: '#ff8a8a',
+    email: { r: 255, g: 253, b: 189 },
+    instagram: { r: 224, g: 175, b: 255 },
+    linkedIn: { r: 164, g: 214, b: 255 },
+    github: { r: 255, g: 138, b: 138 },
     orangeLamp: '#ffa42c',
     purpleLamp: '#d187ff',
     pinkLamp: '#ff56d8',
@@ -116,6 +117,46 @@ export default function Model({ data, ...props }) {
     }
   };
 
+  const handlePointerEnter = (e) => {
+    setHovering(true);
+
+    if (view === 'socials' && !moving) {
+      let mesh = e.object;
+
+      gsap.to(mesh.material.color, {
+        duration: 0.75,
+        r: 1,
+        g: 1,
+        b: 1,
+        ease: 'linear',
+      });
+    }
+  };
+
+  const handlePointerOut = (e) => {
+    setHovering(false);
+
+    if (view === 'socials' && !moving) {
+      let mesh = e.object;
+      let tempColors = mesh.material.color.clone().multiplyScalar(255);
+
+      gsap.to(tempColors, {
+        duration: 0.75,
+        r: emissionColors[mesh.userData.name].r,
+        g: emissionColors[mesh.userData.name].g,
+        b: emissionColors[mesh.userData.name].b,
+        ease: 'linear',
+        onUpdate: () => {
+          mesh.material.color.set(
+            `rgb(${Math.floor(tempColors.r)},${Math.floor(
+              tempColors.g
+            )},${Math.floor(tempColors.b)})`
+          );
+        },
+      });
+    }
+  };
+
   // EFFECTS
   useEffect(() => {
     setLoaded();
@@ -141,7 +182,7 @@ export default function Model({ data, ...props }) {
         geometry={nodes.mac_pro_emissive.geometry}
         position={[0.86955, 0.30488, -0.54437]}
       >
-        <meshBasicMaterial color={emissionColors.screens} />
+        <meshBasicMaterial color={emissionColors.screens} transparent />
       </mesh>
       <mesh
         geometry={nodes.phone_emissive.geometry}
@@ -186,29 +227,38 @@ export default function Model({ data, ...props }) {
       <mesh
         geometry={nodes.email_emissive.geometry}
         position={[-1.43596, 1.74085, -0.82356]}
-        onPointerEnter={() => setHovering(true)}
-        onPointerOut={() => setHovering(false)}
+        onPointerEnter={(e) => handlePointerEnter(e)}
+        onPointerOut={(e) => handlePointerOut(e)}
         onClick={emailClicked}
+        userData={{ name: 'email' }}
       >
-        <meshBasicMaterial color={emissionColors.email} />
+        <meshBasicMaterial
+          color={`rgb(${emissionColors.email.r},${emissionColors.email.g},${emissionColors.email.b})`}
+        />
       </mesh>
       <mesh
         geometry={nodes.insta_emissive.geometry}
         position={[-1.43596, 1.74085, -0.82356]}
-        onPointerEnter={() => setHovering(true)}
-        onPointerOut={() => setHovering(false)}
+        onPointerEnter={(e) => handlePointerEnter(e)}
+        onPointerOut={(e) => handlePointerOut(e)}
         onClick={instaClicked}
+        userData={{ name: 'instagram' }}
       >
-        <meshBasicMaterial color={emissionColors.instagram} />
+        <meshBasicMaterial
+          color={`rgb(${emissionColors.instagram.r},${emissionColors.instagram.g},${emissionColors.instagram.b})`}
+        />
       </mesh>
       <mesh
         geometry={nodes.linkedin_emissive.geometry}
         position={[-1.43596, 1.74085, -0.82356]}
-        onPointerEnter={() => setHovering(true)}
-        onPointerOut={() => setHovering(false)}
+        onPointerEnter={(e) => handlePointerEnter(e)}
+        onPointerOut={(e) => handlePointerOut(e)}
         onClick={linkedinClicked}
+        userData={{ name: 'linkedIn' }}
       >
-        <meshBasicMaterial color={emissionColors.linkedIn} />
+        <meshBasicMaterial
+          color={`rgb(${emissionColors.linkedIn.r},${emissionColors.linkedIn.g},${emissionColors.linkedIn.b})`}
+        />
       </mesh>
       <mesh
         geometry={nodes.table_emissive.geometry}
@@ -243,53 +293,56 @@ export default function Model({ data, ...props }) {
       <mesh
         geometry={nodes.github_emissive.geometry}
         position={[-1.43596, 1.74085, -0.82356]}
-        onPointerEnter={() => setHovering(true)}
-        onPointerOut={() => setHovering(false)}
+        onPointerEnter={(e) => handlePointerEnter(e)}
+        onPointerOut={(e) => handlePointerOut(e)}
         onClick={githubClicked}
+        userData={{ name: 'github' }}
       >
-        <meshBasicMaterial color={emissionColors.github} />
+        <meshBasicMaterial
+          color={`rgb(${emissionColors.github.r},${emissionColors.github.g},${emissionColors.github.b})`}
+        />
       </mesh>
       <mesh
         geometry={nodes.bake2.geometry}
         position={[0.99771, 0.87454, -1.053]}
       >
-        <meshBasicMaterial map={bakedTex2} />
+        <meshBasicMaterial map={bakedTex2} transparent />
       </mesh>
       <mesh
         geometry={nodes.bake3.geometry}
         position={[0.86468, 0.35838, -0.66076]}
       >
-        <meshBasicMaterial map={bakedTex3} />
+        <meshBasicMaterial map={bakedTex3} transparent />
       </mesh>
       <mesh
         geometry={nodes.bake4.geometry}
         position={[1.19391, 0.46596, -0.72178]}
       >
-        <meshBasicMaterial map={bakedTex4} />
+        <meshBasicMaterial map={bakedTex4} transparent />
       </mesh>
       <mesh
         geometry={nodes.bake5.geometry}
         position={[-0.79024, -0.91263, -0.7532]}
       >
-        <meshBasicMaterial map={bakedTex5} />
+        <meshBasicMaterial map={bakedTex5} transparent />
       </mesh>
       <mesh
         geometry={nodes.bake6.geometry}
         position={[-1.1789, 0.51015, -0.87188]}
       >
-        <meshBasicMaterial map={bakedTex6} />
+        <meshBasicMaterial map={bakedTex6} transparent />
       </mesh>
       <mesh
         geometry={nodes.bake7.geometry}
         position={[1.62294, 1.49388, -0.73567]}
       >
-        <meshBasicMaterial map={bakedTex7} />
+        <meshBasicMaterial map={bakedTex7} transparent />
       </mesh>
       <mesh
         geometry={nodes.bake8.geometry}
         position={[-0.00624, 0.83668, 0.20061]}
       >
-        <meshBasicMaterial map={bakedTex8} />
+        <meshBasicMaterial map={bakedTex8} transparent />
       </mesh>
 
       {/* <OrbitControls camera={myCamera} ref={controls} /> */}

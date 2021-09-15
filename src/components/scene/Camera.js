@@ -49,7 +49,7 @@ const Camera = (props) => {
       let rotation = views[newView].rotation;
 
       gsap.to(ref.current.rotation, {
-        duration: 3,
+        duration: 1.5,
         x: rotation[0],
         y: rotation[1],
         z: rotation[2],
@@ -57,7 +57,7 @@ const Camera = (props) => {
       });
 
       gsap.to(ref.current.position, {
-        duration: 3,
+        duration: 1.5,
         x: position[0],
         y: position[1],
         z: position[2],
