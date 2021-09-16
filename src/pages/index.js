@@ -70,8 +70,8 @@ const IndexPage = () => {
     let el = document.querySelector('.cursor');
 
     if (el !== null) {
-      document.querySelector('.cursor').style.top = `${e.clientY}px`;
-      document.querySelector('.cursor').style.left = `${e.clientX}px`;
+      document.querySelector('.cursorWrapper').style.top = `${e.clientY}px`;
+      document.querySelector('.cursorWrapper').style.left = `${e.clientX}px`;
     }
   };
 

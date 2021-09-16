@@ -12,14 +12,14 @@
 body {
   background-color: $primary;
   color: $secondary;
-  overflow: none;
+  overflow: hidden;
 }
 
 #index {
   width: 100vw;
   height: 100vh;
   cursor: none;
-  overflow: none;
+  overflow: hidden;
 }
 
 #hero {
@@ -272,35 +272,86 @@ body {
   place-items: center;
 }
 
+.cursorWrapper {
+  position: absolute;
+  z-index: 15;
+  pointer-events: none;
+}
+
 .cursor {
+  transform: translate(-50%, -50%);
   width: 0.75rem;
   height: 0.75rem;
   pointer-events: none;
   box-shadow: 0px 0px 0.25rem 0.1rem #525252;
 
   position: absolute;
-  z-index: 15;
-  transform: translate(-50%, -50%);
 
   border: 0px white solid;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 1);
-  backdrop-filter: blur(0px);
+  background-color: $primary;
   transition: width ease-in-out 0.2s, height ease-in-out 0.2s,
-    border ease-in-out 0.2s, background-color ease-in-out 0.2s;
+    border ease-in-out 0.2s, background-color ease-in-out 0.2s,
+    box-shadow ease-in-out 0.2s;
 
   &.hovering {
-    width: 3rem;
     height: 3rem;
+    width: 3rem;
 
-    border: 3px white solid;
-    background-color: rgba(255, 255, 255, 0);
+    box-shadow: 0px 0px 0.5rem 0.2rem #525252;
 
-    animation-name: cursorAnimation;
-    animation-duration: 1.5s;
-    animation-timing-function: ease-in;
+    ~ .tooltip {
+      transform: scaleX(1) scaleY(1) translateY(-50%);
+    }
+  }
+
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0) 35%,
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 65%,
+      rgba(255, 255, 255, 0) 100%
+    );
+
+    animation-name: rippleAnimation;
+    animation-timing-function: ease-out;
     animation-iteration-count: infinite;
-    animation-direction: alternate;
+    animation-duration: 1s;
+    animation-delay: 2.5s;
+  }
+
+  ~ .tooltip {
+    position: absolute;
+    width: auto;
+    height: 2.5rem;
+    z-index: -1;
+    padding-left: 2.5rem;
+    padding-right: 1.5rem;
+    box-shadow: 0px 0px 0.5rem 0.2rem #525252;
+
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+
+    display: grid;
+    place-items: center;
+
+    background-color: $primary;
+    transform-origin: top left;
+    transform: scaleX(0) scaleY(0) translateY(-50%);
+
+    transition: transform ease-in-out 0.2s, height ease-in-out 0.2s;
+
+    p {
+      font-family: fonts.$serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
   }
 }
 
@@ -310,5 +361,25 @@ body {
   }
   100% {
     backdrop-filter: blur(6px);
+  }
+}
+
+@keyframes rippleAnimation {
+  0% {
+    opacity: 1;
+
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  100% {
+    opacity: 0;
+
+    left: -75%;
+    top: -75%;
+    right: -75%;
+    bottom: -75%;
   }
 }

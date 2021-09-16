@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Model from './Model';
 import FakeHero from '../FakeHero';
@@ -14,6 +14,83 @@ const Scene = (props) => {
   const setView = useStore((state) => state.setView);
   const experienceStarted = useStore((state) => state.experienceStarted);
   const hovering = useStore((state) => state.hovering);
+  const view = useStore((state) => state.view);
+
+  useEffect(() => {
+    const el = document.querySelector('.tooltipContent');
+
+    if (el) {
+      if (view !== 'socials') {
+        switch (hovering) {
+          case 'case1': {
+            el.textContent = 'Case Study: Beresford Design';
+            break;
+          }
+          case 'case2': {
+            el.textContent = 'Case Study: TBA';
+            break;
+          }
+          case 'case3': {
+            el.textContent = 'Case Study: TBA';
+            break;
+          }
+          case 'email': {
+            el.innerHTML = 'Social Media';
+            break;
+          }
+          case 'instagram': {
+            el.textContent = 'Social Media';
+            break;
+          }
+          case 'linkedIn': {
+            el.textContent = 'Social Media';
+            break;
+          }
+          case 'github': {
+            el.textContent = 'Social Media';
+            break;
+          }
+          default: {
+            return;
+          }
+        }
+      } else {
+        switch (hovering) {
+          case 'case1': {
+            el.textContent = 'Case Study: Beresford Design';
+            break;
+          }
+          case 'case2': {
+            el.textContent = 'Case Study: TBA';
+            break;
+          }
+          case 'case3': {
+            el.textContent = 'Case Study: TBA';
+            break;
+          }
+          case 'email': {
+            el.innerHTML = 'Email <u>consult@beresforddesign.net</u>';
+            break;
+          }
+          case 'instagram': {
+            el.textContent = 'Check out my Instagram';
+            break;
+          }
+          case 'linkedIn': {
+            el.textContent = 'View my Linked In';
+            break;
+          }
+          case 'github': {
+            el.textContent = 'Head to my GitHub';
+            break;
+          }
+          default: {
+            return;
+          }
+        }
+      }
+    }
+  }, [hovering]);
 
   return (
     <>

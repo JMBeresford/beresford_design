@@ -26,7 +26,7 @@ const store = (set, get) => ({
   setMoving: (moving) => {
     set(() => ({ moving: moving }));
   },
-  hovering: false,
+  hovering: null,
   setHovering: (hovering) => {
     set(() => ({ hovering: hovering }));
   },

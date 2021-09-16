@@ -118,13 +118,16 @@ export default function Model({ data, ...props }) {
   };
 
   const handlePointerEnter = (e) => {
-    setHovering(true);
+    if (moving) {
+      return;
+    }
 
-    if (view === 'socials' && !moving) {
-      let mesh = e.object;
+    let mesh = e.object;
+    setHovering(mesh.userData.name);
 
+    if (view === 'socials' && !moving && mesh.userData.name !== 'case1') {
       gsap.to(mesh.material.color, {
-        duration: 0.75,
+        duration: 0.5,
         r: 1,
         g: 1,
         b: 1,
@@ -134,14 +137,14 @@ export default function Model({ data, ...props }) {
   };
 
   const handlePointerOut = (e) => {
-    setHovering(false);
+    setHovering(null);
+    let mesh = e.object;
 
-    if (view === 'socials' && !moving) {
-      let mesh = e.object;
+    if (view === 'socials' && !moving && mesh.userData.name !== 'case1') {
       let tempColors = mesh.material.color.clone().multiplyScalar(255);
 
       gsap.to(tempColors, {
-        duration: 0.75,
+        duration: 0.5,
         r: emissionColors[mesh.userData.name].r,
         g: emissionColors[mesh.userData.name].g,
         b: emissionColors[mesh.userData.name].b,
@@ -200,27 +203,30 @@ export default function Model({ data, ...props }) {
       <mesh
         geometry={nodes.ipad_emissive001.geometry}
         position={[-1.33327, 1.38233, -0.77324]}
-        onPointerEnter={() => setHovering(true)}
-        onPointerOut={() => setHovering(false)}
+        onPointerEnter={(e) => handlePointerEnter(e)}
+        onPointerOut={(e) => handlePointerOut(e)}
         onClick={case1Clicked}
+        userData={{ name: 'case1' }}
       >
         <meshBasicMaterial map={logoTex} />
       </mesh>
       <mesh
         geometry={nodes.ipad_emissive002.geometry}
         position={[-0.90973, 0.98622, -0.77324]}
-        onPointerEnter={() => setHovering(true)}
-        onPointerOut={() => setHovering(false)}
+        onPointerEnter={(e) => handlePointerEnter(e)}
+        onPointerOut={(e) => handlePointerOut(e)}
         onClick={case2Clicked}
+        userData={{ name: 'case2' }}
       >
         <meshBasicMaterial map={logoTex} />
       </mesh>
       <mesh
         geometry={nodes.ipad_emissive.geometry}
         position={[-1.33327, 0.6179, -0.77324]}
-        onPointerEnter={() => setHovering(true)}
-        onPointerOut={() => setHovering(false)}
+        onPointerEnter={(e) => handlePointerEnter(e)}
+        onPointerOut={(e) => handlePointerOut(e)}
         onClick={case3Clicked}
+        userData={{ name: 'case3' }}
       >
         <meshBasicMaterial map={logoTex} />
       </mesh>
