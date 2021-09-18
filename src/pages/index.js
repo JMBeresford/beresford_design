@@ -7,51 +7,51 @@ import { graphql, useStaticQuery } from 'gatsby';
 const IndexPage = () => {
   const query = useStaticQuery(graphql`
     query {
-      bake2: file(relativePath: { eq: "bakes/bake2.png" }) {
+      bake2: file(relativePath: { eq: "bakes/bake2.jpg" }) {
         childImageSharp {
-          fixed(height: 2048, width: 2048, quality: 100, jpegQuality: 100) {
+          fixed(height: 4096, width: 4096, quality: 100, jpegQuality: 100) {
             src
           }
         }
       }
-      bake3: file(relativePath: { eq: "bakes/bake3.png" }) {
+      bake3: file(relativePath: { eq: "bakes/bake3.jpg" }) {
         childImageSharp {
-          fixed(height: 2048, width: 2048, quality: 100, jpegQuality: 100) {
+          fixed(height: 4096, width: 4096, quality: 100, jpegQuality: 100) {
             src
           }
         }
       }
-      bake4: file(relativePath: { eq: "bakes/bake4.png" }) {
+      bake4: file(relativePath: { eq: "bakes/bake4.jpg" }) {
         childImageSharp {
-          fixed(height: 2048, width: 2048, quality: 100, jpegQuality: 100) {
+          fixed(height: 4096, width: 4096, quality: 100, jpegQuality: 100) {
             src
           }
         }
       }
-      bake5: file(relativePath: { eq: "bakes/bake5.png" }) {
+      bake5: file(relativePath: { eq: "bakes/bake5.jpg" }) {
         childImageSharp {
-          fixed(height: 2048, width: 2048, quality: 100, jpegQuality: 100) {
+          fixed(height: 4096, width: 4096, quality: 100, jpegQuality: 100) {
             src
           }
         }
       }
-      bake6: file(relativePath: { eq: "bakes/bake6.png" }) {
+      bake6: file(relativePath: { eq: "bakes/bake6.jpg" }) {
         childImageSharp {
-          fixed(height: 2048, width: 2048, quality: 100, jpegQuality: 100) {
+          fixed(height: 4096, width: 4096, quality: 100, jpegQuality: 100) {
             src
           }
         }
       }
-      bake7: file(relativePath: { eq: "bakes/bake7.png" }) {
+      bake7: file(relativePath: { eq: "bakes/bake7.jpg" }) {
         childImageSharp {
-          fixed(height: 2048, width: 2048, quality: 100, jpegQuality: 100) {
+          fixed(height: 1024, width: 1024, quality: 100, jpegQuality: 100) {
             src
           }
         }
       }
-      bake8: file(relativePath: { eq: "bakes/bake8.png" }) {
+      bake8: file(relativePath: { eq: "bakes/bake8.jpg" }) {
         childImageSharp {
-          fixed(height: 2048, width: 2048, quality: 100, jpegQuality: 100) {
+          fixed(height: 4096, width: 4096, quality: 100) {
             src
           }
         }

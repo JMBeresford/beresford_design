@@ -102,7 +102,6 @@ const Scene = (props) => {
         dpr={Math.min(pixelRatio, 2)}
         gl={{ alpha: true }}
         onCreated={(state) => {
-          state.gl.setClearColor('#000000');
           state.gl.setClearAlpha('#f1f6f9');
         }}
       >
