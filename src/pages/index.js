@@ -51,7 +51,7 @@ const IndexPage = () => {
       }
       bake8: file(relativePath: { eq: "bakes/bake8.jpg" }) {
         childImageSharp {
-          fixed(height: 4096, width: 4096, quality: 100) {
+          fixed(height: 4096, width: 4096, quality: 100, jpegQuality: 100) {
             src
           }
         }

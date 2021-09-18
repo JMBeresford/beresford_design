@@ -105,7 +105,7 @@ const Scene = (props) => {
           state.gl.setClearAlpha('#f1f6f9');
         }}
       >
-        <Camera fov={75} near={0.01} far={100} />
+        <Camera fov={60} near={0.01} far={10} />
         <Suspense fallback={null}>
           <Model
             onClick={() => {

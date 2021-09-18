@@ -18,20 +18,20 @@ const Camera = (props) => {
         rotation: [0, 0, 0],
       },
       main: {
-        position: [0, 1.2, 1.2],
+        position: [0, 1.4, 2],
         rotation: [-0.23608012159022193, 0, 0],
       },
       case1: {
-        position: [-1.1, 1.54, -0.22],
-        rotation: [-0.2516899717581867, 0, 0],
+        position: [-1.1, 1.58, -0.22],
+        rotation: [-0.257, 0, 0],
       },
       case2: {
-        position: [-1.1, 1.18, -0.22],
-        rotation: [-0.2516899717581867, 0, 0],
+        position: [-1.1, 1.22, -0.22],
+        rotation: [-0.257, 0, 0],
       },
       case3: {
-        position: [-1.1, 0.82, -0.22],
-        rotation: [-0.25168997175818686, 0, 0],
+        position: [-1.1, 0.86, -0.22],
+        rotation: [-0.257, 0, 0],
       },
       socials: {
         position: [-1.03, 1.87, -0.22],
