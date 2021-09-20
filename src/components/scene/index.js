@@ -94,8 +94,10 @@ const Scene = (props) => {
     }
   }, [hovering]);
 
+  const videoEl = null;
+
   if (typeof document !== 'undefined') {
-    const videoEl = document.createElement('video');
+    videoEl = document.createElement('video');
 
     videoEl.src = screenVid;
     videoEl.autoplay = true;
