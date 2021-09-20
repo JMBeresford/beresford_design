@@ -94,14 +94,16 @@ const Scene = (props) => {
     }
   }, [hovering]);
 
-  const videoEl = document.createElement('video');
+  if (typeof document !== 'undefined') {
+    const videoEl = document.createElement('video');
 
-  videoEl.src = screenVid;
-  videoEl.autoplay = true;
-  videoEl.loop = true;
-  videoEl.playsInline = true;
-  videoEl.muted = true;
-  videoEl.play();
+    videoEl.src = screenVid;
+    videoEl.autoplay = true;
+    videoEl.loop = true;
+    videoEl.playsInline = true;
+    videoEl.muted = true;
+    videoEl.play();
+  }
 
   return (
     <>
