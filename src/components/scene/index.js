@@ -94,7 +94,7 @@ const Scene = (props) => {
     }
   }, [hovering]);
 
-  const videoEl = null;
+  var videoEl = null;
 
   if (typeof document !== 'undefined') {
     videoEl = document.createElement('video');
