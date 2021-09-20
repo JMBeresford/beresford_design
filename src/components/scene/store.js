@@ -30,6 +30,10 @@ const store = (set, get) => ({
   setHovering: (hovering) => {
     set(() => ({ hovering: hovering }));
   },
+  timeElapsed: 0,
+  setTimeElapsed: (time) => {
+    set(() => ({ timeElapsed: time }));
+  },
 });
 
 const useStore = create(devtools(store));

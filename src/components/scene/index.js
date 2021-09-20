@@ -6,6 +6,8 @@ import LoadingScreen from '../LoadingScreen';
 import useStore from './store';
 import Camera from './Camera';
 import Cursor from './Cursor';
+import screenVid from '../../video/screenVid.mp4';
+import { sRGBEncoding } from 'three';
 
 const Scene = (props) => {
   const pixelRatio =
@@ -69,19 +71,19 @@ const Scene = (props) => {
             break;
           }
           case 'email': {
-            el.innerHTML = 'Email <u>consult@beresforddesign.net</u>';
+            el.innerHTML = 'Email consult@beresforddesign.net';
             break;
           }
           case 'instagram': {
-            el.textContent = 'Check out my Instagram';
+            el.textContent = 'Instagram';
             break;
           }
           case 'linkedIn': {
-            el.textContent = 'View my Linked In';
+            el.textContent = 'LinkedIn';
             break;
           }
           case 'github': {
-            el.textContent = 'Head to my GitHub';
+            el.textContent = 'GitHub';
             break;
           }
           default: {
@@ -92,6 +94,15 @@ const Scene = (props) => {
     }
   }, [hovering]);
 
+  const videoEl = document.createElement('video');
+
+  videoEl.src = screenVid;
+  videoEl.autoplay = true;
+  videoEl.loop = true;
+  videoEl.playsInline = true;
+  videoEl.muted = true;
+  videoEl.play();
+
   return (
     <>
       <LoadingScreen />
@@ -100,7 +111,7 @@ const Scene = (props) => {
       <Canvas
         id='heroCanvas'
         dpr={Math.min(pixelRatio, 2)}
-        gl={{ alpha: true }}
+        gl={{ alpha: true, outputEncoding: sRGBEncoding }}
         onCreated={(state) => {
           state.gl.setClearAlpha('#f1f6f9');
         }}
@@ -119,6 +130,7 @@ const Scene = (props) => {
               }
             }}
             data={props.query}
+            videoEl={videoEl}
           />
         </Suspense>
       </Canvas>

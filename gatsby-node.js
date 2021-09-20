@@ -18,9 +18,7 @@ exports.onCreateWebpackConfig = ({
         {
           test: /\.(glsl|vs|fs|vert|frag)$/,
           exclude: /node_modules/,
-          use: {
-            loader: 'raw-loader',
-          },
+          use: ['raw-loader', 'glslify-loader'],
         },
       ],
     },

@@ -18,7 +18,7 @@ const Camera = (props) => {
         rotation: [0, 0, 0],
       },
       main: {
-        position: [0, 1.4, 2],
+        position: [0, 1.4, 1.5],
         rotation: [-0.23608012159022193, 0, 0],
       },
       case1: {
