@@ -25,10 +25,6 @@ const store = (set, get) => ({
   setMoving: (moving) => {
     set(() => ({ moving: moving }));
   },
-  hovering: null,
-  setHovering: (hovering) => {
-    set(() => ({ hovering: hovering }));
-  },
 });
 
 const useStore = create(store);

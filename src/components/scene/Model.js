@@ -25,7 +25,7 @@ const EmissiveCubeMaterial = shaderMaterial(
 
 extend({ EmissiveCubeMaterial });
 
-export default function Model({ data, videoEl, ...props }) {
+export default function Model({ data, videos, ...props }) {
   // REF's
   const group = useRef();
   const monitor = useRef();
@@ -35,7 +35,6 @@ export default function Model({ data, videoEl, ...props }) {
   const githubRef = useRef();
 
   const setLoaded = useStore((state) => state.setLoaded);
-  const setHovering = useStore((state) => state.setHovering);
   const setView = useStore((state) => state.setView);
   const view = useStore((state) => state.view);
   const moving = useStore((state) => state.moving);
@@ -134,34 +133,28 @@ export default function Model({ data, videoEl, ...props }) {
     const tooltip = document.querySelector('.tooltipContent');
     const cursor = document.querySelector('.cursor');
 
-    if (!moving) {
-      if (view !== 'socials' && mesh.userData.cube) {
-        cursor.classList.add('socials');
-        cursor.classList.add('hovering');
-        tooltip.textContent = 'Social Media';
-      } else {
-        cursor.classList.add(mesh.userData.name);
-        cursor.classList.add('hovering');
-        tooltip.textContent = mesh.userData.tooltip;
-      }
+    if (view !== 'socials' && mesh.userData.cube) {
+      cursor.classList.add('socials');
+      cursor.classList.add('hovering');
+      tooltip.textContent = 'Social Media';
+    } else {
+      cursor.classList.add(mesh.userData.name);
+      cursor.classList.add('hovering');
+      tooltip.textContent = mesh.userData.tooltip;
+    }
 
-      if (
-        view === 'socials' &&
-        mesh.userData.cube &&
-        !mesh.userData.animating
-      ) {
-        gsap.to(mesh.material.uniforms.uScale, {
-          duration: 0.2,
-          ease: Power1.easeInOut,
-          value: 1.1,
-          onStart: () => {
-            mesh.userData.animating = true;
-          },
-          onComplete: () => {
-            mesh.userData.animating = false;
-          },
-        });
-      }
+    if (view === 'socials' && mesh.userData.cube && !mesh.userData.animating) {
+      gsap.to(mesh.material.uniforms.uScale, {
+        duration: 0.2,
+        ease: Power1.easeInOut,
+        value: 1.1,
+        onStart: () => {
+          mesh.userData.animating = true;
+        },
+        onComplete: () => {
+          mesh.userData.animating = false;
+        },
+      });
     }
   };
 
@@ -243,7 +236,7 @@ export default function Model({ data, videoEl, ...props }) {
         <meshBasicMaterial transparent={false} opacity={0}>
           <videoTexture
             attach='map'
-            args={[videoEl]}
+            args={[videos.idleScreen]}
             flipY={false}
             encoding={sRGBEncoding}
             center={[0.5, 0.5]}
@@ -262,11 +255,11 @@ export default function Model({ data, videoEl, ...props }) {
         <meshBasicMaterial>
           <videoTexture
             attach='map'
-            args={[videoEl]}
+            args={[videos.bdPreview]}
             flipY={false}
             encoding={sRGBEncoding}
             center={[0.5, 0.5]}
-            repeat={[0.7, 1.3]}
+            repeat={[0.8, 1.4]}
           />
         </meshBasicMaterial>
       </mesh>
@@ -281,7 +274,7 @@ export default function Model({ data, videoEl, ...props }) {
         <meshBasicMaterial>
           <videoTexture
             attach='map'
-            args={[videoEl]}
+            args={[videos.idleScreen]}
             flipY={false}
             encoding={sRGBEncoding}
             center={[0.5, 0.5]}
@@ -300,7 +293,7 @@ export default function Model({ data, videoEl, ...props }) {
         <meshBasicMaterial>
           <videoTexture
             attach='map'
-            args={[videoEl]}
+            args={[videos.idleScreen]}
             flipY={false}
             encoding={sRGBEncoding}
             center={[0.5, 0.5]}

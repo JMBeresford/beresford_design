@@ -7,6 +7,7 @@ import useStore from './store';
 import Camera from './Camera';
 import Cursor from './Cursor';
 import screenVid from '../../video/screenVid.mp4';
+import bdPreview from '../../video/beresfordDesignPreview.mp4';
 import { sRGBEncoding } from 'three';
 
 const Scene = (props) => {
@@ -17,17 +18,27 @@ const Scene = (props) => {
   const experienceStarted = useStore((state) => state.experienceStarted);
   const hovering = useStore((state) => state.hovering);
 
-  var videoEl = null;
+  const vids = {
+    idleScreen: null,
+    bdPreview: null,
+  };
 
   if (typeof document !== 'undefined') {
-    videoEl = document.createElement('video');
+    vids.idleScreen = document.createElement('video');
+    vids.idleScreen.src = screenVid;
+    vids.idleScreen.autoplay = true;
+    vids.idleScreen.loop = true;
+    vids.idleScreen.playsInline = true;
+    vids.idleScreen.muted = true;
+    vids.idleScreen.play();
 
-    videoEl.src = screenVid;
-    videoEl.autoplay = true;
-    videoEl.loop = true;
-    videoEl.playsInline = true;
-    videoEl.muted = true;
-    videoEl.play();
+    vids.bdPreview = document.createElement('video');
+    vids.bdPreview.src = bdPreview;
+    vids.bdPreview.autoplay = true;
+    vids.bdPreview.loop = true;
+    vids.bdPreview.playsInline = true;
+    vids.bdPreview.muted = true;
+    vids.bdPreview.play();
   }
 
   return (
@@ -62,7 +73,7 @@ const Scene = (props) => {
               }
             }}
             data={props.query}
-            videoEl={videoEl}
+            videos={vids}
           />
         </Suspense>
       </Canvas>
