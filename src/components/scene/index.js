@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Model from './Model';
 import FakeHero from '../FakeHero';
@@ -8,7 +8,6 @@ import Camera from './Camera';
 import Cursor from './Cursor';
 import screenVid from '../../video/screenVid.mp4';
 import bdPreview from '../../video/beresfordDesignPreview.mp4';
-import { sRGBEncoding } from 'three';
 
 const Scene = (props) => {
   const pixelRatio =
@@ -16,7 +15,6 @@ const Scene = (props) => {
 
   const setView = useStore((state) => state.setView);
   const experienceStarted = useStore((state) => state.experienceStarted);
-  const hovering = useStore((state) => state.hovering);
 
   const vids = {
     idleScreen: null,
@@ -49,7 +47,7 @@ const Scene = (props) => {
       <Canvas
         id='heroCanvas'
         dpr={Math.min(pixelRatio, 2)}
-        gl={{ alpha: true, outputEncoding: sRGBEncoding }}
+        gl={{ alpha: true }}
         onCreated={(state) => {
           state.gl.setClearAlpha('#f1f6f9');
         }}
@@ -72,7 +70,6 @@ const Scene = (props) => {
                 setView('main');
               }
             }}
-            data={props.query}
             videos={vids}
           />
         </Suspense>

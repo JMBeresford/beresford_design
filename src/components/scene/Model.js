@@ -11,6 +11,13 @@ import { extend, useFrame } from '@react-three/fiber';
 import { Color, sRGBEncoding } from 'three';
 import emissiveVertexShader from '../../shaders/emissiveCube/emissiveCube.vert';
 import emissiveFragmentShader from '../../shaders/emissiveCube/emissiveCube.frag';
+import bake2 from '../../images/bakes/bake2.jpg';
+import bake3 from '../../images/bakes/bake3.jpg';
+import bake4 from '../../images/bakes/bake4.jpg';
+import bake5 from '../../images/bakes/bake5.jpg';
+import bake6 from '../../images/bakes/bake6.jpg';
+import bake7 from '../../images/bakes/bake7.jpg';
+import bake8 from '../../images/bakes/bake8.jpg';
 
 const EmissiveCubeMaterial = shaderMaterial(
   {
@@ -25,7 +32,7 @@ const EmissiveCubeMaterial = shaderMaterial(
 
 extend({ EmissiveCubeMaterial });
 
-export default function Model({ data, videos, ...props }) {
+export default function Model({ videos, ...props }) {
   // REF's
   const group = useRef();
   const monitor = useRef();
@@ -37,17 +44,16 @@ export default function Model({ data, videos, ...props }) {
   const setLoaded = useStore((state) => state.setLoaded);
   const setView = useStore((state) => state.setView);
   const view = useStore((state) => state.view);
-  const moving = useStore((state) => state.moving);
   const experienceStarted = useStore((state) => state.experienceStarted);
 
   // LOAD TEXTURES AND CONFIG MATERIALS
-  const bakedTex2 = useTexture(data.bake2.publicURL);
-  const bakedTex3 = useTexture(data.bake3.publicURL);
-  const bakedTex4 = useTexture(data.bake4.publicURL);
-  const bakedTex5 = useTexture(data.bake5.publicURL);
-  const bakedTex6 = useTexture(data.bake6.publicURL);
-  const bakedTex7 = useTexture(data.bake7.publicURL);
-  const bakedTex8 = useTexture(data.bake8.publicURL);
+  const bakedTex2 = useTexture(bake2);
+  const bakedTex3 = useTexture(bake3);
+  const bakedTex4 = useTexture(bake4);
+  const bakedTex5 = useTexture(bake5);
+  const bakedTex6 = useTexture(bake6);
+  const bakedTex7 = useTexture(bake7);
+  const bakedTex8 = useTexture(bake8);
 
   bakedTex2.flipY = false;
   bakedTex3.flipY = false;
