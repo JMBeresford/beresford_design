@@ -1,5 +1,4 @@
 import create from 'zustand';
-import { devtools } from 'zustand/middleware';
 
 const store = (set, get) => ({
   view: 'landing',
@@ -30,12 +29,8 @@ const store = (set, get) => ({
   setHovering: (hovering) => {
     set(() => ({ hovering: hovering }));
   },
-  timeElapsed: 0,
-  setTimeElapsed: (time) => {
-    set(() => ({ timeElapsed: time }));
-  },
 });
 
-const useStore = create(devtools(store));
+const useStore = create(store);
 
 export default useStore;

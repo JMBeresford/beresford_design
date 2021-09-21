@@ -7,35 +7,7 @@ const Cursor = () => {
 
   return (
     <div className='cursorWrapper'>
-      <div
-        className={
-          'cursor' +
-          (hovering ? ' hovering' : ' ') +
-          (hovering === 'case1' ? ' case1' : '') +
-          (hovering === 'case2' ? ' case2' : '') +
-          (hovering === 'case3' ? ' case3' : '') +
-          (hovering === 'email'
-            ? view === 'socials'
-              ? ' email'
-              : ' socials'
-            : '') +
-          (hovering === 'instagram'
-            ? view === 'socials'
-              ? ' instagram'
-              : ' socials'
-            : '') +
-          (hovering === 'linkedIn'
-            ? view === 'socials'
-              ? ' linkedIn'
-              : ' socials'
-            : '') +
-          (hovering === 'github'
-            ? view === 'socials'
-              ? ' github'
-              : ' socials'
-            : '')
-        }
-      >
+      <div className='cursor'>
         <div className='ripple' />
       </div>
       <div className='tooltip'>

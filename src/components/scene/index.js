@@ -16,83 +16,6 @@ const Scene = (props) => {
   const setView = useStore((state) => state.setView);
   const experienceStarted = useStore((state) => state.experienceStarted);
   const hovering = useStore((state) => state.hovering);
-  const view = useStore((state) => state.view);
-
-  useEffect(() => {
-    const el = document.querySelector('.tooltipContent');
-
-    if (el) {
-      if (view !== 'socials') {
-        switch (hovering) {
-          case 'case1': {
-            el.textContent = 'Case Study: Beresford Design';
-            break;
-          }
-          case 'case2': {
-            el.textContent = 'Case Study: TBA';
-            break;
-          }
-          case 'case3': {
-            el.textContent = 'Case Study: TBA';
-            break;
-          }
-          case 'email': {
-            el.innerHTML = 'Social Media';
-            break;
-          }
-          case 'instagram': {
-            el.textContent = 'Social Media';
-            break;
-          }
-          case 'linkedIn': {
-            el.textContent = 'Social Media';
-            break;
-          }
-          case 'github': {
-            el.textContent = 'Social Media';
-            break;
-          }
-          default: {
-            return;
-          }
-        }
-      } else {
-        switch (hovering) {
-          case 'case1': {
-            el.textContent = 'Case Study: Beresford Design';
-            break;
-          }
-          case 'case2': {
-            el.textContent = 'Case Study: TBA';
-            break;
-          }
-          case 'case3': {
-            el.textContent = 'Case Study: TBA';
-            break;
-          }
-          case 'email': {
-            el.innerHTML = 'Email consult@beresforddesign.net';
-            break;
-          }
-          case 'instagram': {
-            el.textContent = 'Instagram';
-            break;
-          }
-          case 'linkedIn': {
-            el.textContent = 'LinkedIn';
-            break;
-          }
-          case 'github': {
-            el.textContent = 'GitHub';
-            break;
-          }
-          default: {
-            return;
-          }
-        }
-      }
-    }
-  }, [hovering]);
 
   var videoEl = null;
 
@@ -124,12 +47,17 @@ const Scene = (props) => {
         <Suspense fallback={null}>
           <Model
             onClick={() => {
-              if (!hovering && experienceStarted) {
+              const el = document.querySelector('.cursor');
+              if (!el.classList.contains('hovering') && experienceStarted) {
                 setView('main');
               }
             }}
             onWheel={() => {
-              if (!hovering && experienceStarted) {
+              const el = document.querySelector('.cursor');
+              if (
+                !el.classList.contains('hovering') === undefined &&
+                experienceStarted
+              ) {
                 setView('main');
               }
             }}
