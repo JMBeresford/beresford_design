@@ -107,8 +107,6 @@ body {
           animation-name: loadingOut;
   -webkit-animation-duration: 1s;
           animation-duration: 1s;
-  -webkit-animation-delay: 1s;
-          animation-delay: 1s;
   -webkit-animation-timing-function: ease-out;
           animation-timing-function: ease-out;
   -webkit-animation-fill-mode: forwards;

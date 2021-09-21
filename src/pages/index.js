@@ -8,60 +8,28 @@ const IndexPage = () => {
   const query = useStaticQuery(graphql`
     query {
       bake2: file(relativePath: { eq: "bakes/bake2.jpg" }) {
-        childImageSharp {
-          fixed(height: 4096, width: 4096, quality: 100, jpegQuality: 100) {
-            src
-          }
-        }
+        publicURL
       }
       bake3: file(relativePath: { eq: "bakes/bake3.jpg" }) {
-        childImageSharp {
-          fixed(height: 4096, width: 4096, quality: 100, jpegQuality: 100) {
-            src
-          }
-        }
+        publicURL
       }
       bake4: file(relativePath: { eq: "bakes/bake4.jpg" }) {
-        childImageSharp {
-          fixed(height: 4096, width: 4096, quality: 100, jpegQuality: 100) {
-            src
-          }
-        }
+        publicURL
       }
       bake5: file(relativePath: { eq: "bakes/bake5.jpg" }) {
-        childImageSharp {
-          fixed(height: 4096, width: 4096, quality: 100, jpegQuality: 100) {
-            src
-          }
-        }
+        publicURL
       }
       bake6: file(relativePath: { eq: "bakes/bake6.jpg" }) {
-        childImageSharp {
-          fixed(height: 4096, width: 4096, quality: 100, jpegQuality: 100) {
-            src
-          }
-        }
+        publicURL
       }
       bake7: file(relativePath: { eq: "bakes/bake7.jpg" }) {
-        childImageSharp {
-          fixed(height: 1024, width: 1024, quality: 100, jpegQuality: 100) {
-            src
-          }
-        }
+        publicURL
       }
       bake8: file(relativePath: { eq: "bakes/bake8.jpg" }) {
-        childImageSharp {
-          fixed(height: 4096, width: 4096, quality: 100, jpegQuality: 100) {
-            src
-          }
-        }
+        publicURL
       }
       logo: file(relativePath: { eq: "logo_transparent.png" }) {
-        childImageSharp {
-          fixed(height: 500, width: 491, quality: 100, jpegQuality: 100) {
-            src
-          }
-        }
+        publicURL
       }
     }
   `);

@@ -41,13 +41,13 @@ export default function Model({ data, videos, ...props }) {
   const experienceStarted = useStore((state) => state.experienceStarted);
 
   // LOAD TEXTURES AND CONFIG MATERIALS
-  const bakedTex2 = useTexture(data.bake2.childImageSharp.fixed.src);
-  const bakedTex3 = useTexture(data.bake3.childImageSharp.fixed.src);
-  const bakedTex4 = useTexture(data.bake4.childImageSharp.fixed.src);
-  const bakedTex5 = useTexture(data.bake5.childImageSharp.fixed.src);
-  const bakedTex6 = useTexture(data.bake6.childImageSharp.fixed.src);
-  const bakedTex7 = useTexture(data.bake7.childImageSharp.fixed.src);
-  const bakedTex8 = useTexture(data.bake8.childImageSharp.fixed.src);
+  const bakedTex2 = useTexture(data.bake2.publicURL);
+  const bakedTex3 = useTexture(data.bake3.publicURL);
+  const bakedTex4 = useTexture(data.bake4.publicURL);
+  const bakedTex5 = useTexture(data.bake5.publicURL);
+  const bakedTex6 = useTexture(data.bake6.publicURL);
+  const bakedTex7 = useTexture(data.bake7.publicURL);
+  const bakedTex8 = useTexture(data.bake8.publicURL);
 
   bakedTex2.flipY = false;
   bakedTex3.flipY = false;
