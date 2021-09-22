@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: 'https://www.beresforddesign.net',
+    siteUrl: 'https://www.beresford-design.com',
     title: 'UNDER CONSTRUCTION',
   },
   plugins: [
