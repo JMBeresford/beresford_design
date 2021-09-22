@@ -16,7 +16,7 @@ const IndexPage = () => {
 
   const desc = `
     Beresford Design is a creative web design agency based in California. Stand out from the
-    crowd and their template generated websites with a bespoke digital masterpiece from Beresford Design!
+    crowd and template generated websites with a bespoke digital masterpiece from Beresford Design.
     `;
 
   return (
@@ -27,7 +27,7 @@ const IndexPage = () => {
         <meta property='og:url' content='http://beresford-design.com/' />
         <meta
           property='og:title'
-          content='Beresford Design - A Creative Web Design Agency'
+          content='Beresford Design - Bespoke Digital Experiences'
         />
         <meta property='og:description' content={desc} />
         <meta property='og:type' content='website' />
