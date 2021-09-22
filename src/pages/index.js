@@ -31,6 +31,8 @@ const IndexPage = () => {
         />
         <meta property='og:description' content={desc} />
         <meta property='og:image' content='https://i.imgur.com/7jTV5ql.png' />
+        <meta property='og:image:width' content='1200' />
+        <meta property='og:image:height' content='630' />
       </Helmet>
       <div id='index'>
         <main id='hero' onPointerMove={handlePointerMove}>
