@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../styles/main.scss';
 import Scene from '../components/scene/';
+import { Helmet } from 'react-helmet';
 
 // markup
 const IndexPage = () => {
@@ -13,12 +14,30 @@ const IndexPage = () => {
     }
   };
 
+  const desc = `
+    Beresford Design is a creative web design agency based in California. Stand out from the
+    crowd and their template generated websites with a bespoke digital masterpiece from Beresford Design!
+    `;
+
   return (
-    <div id='index'>
-      <main id='hero' onPointerMove={handlePointerMove}>
-        <Scene />
-      </main>
-    </div>
+    <>
+      <Helmet>
+        <title>Beresford Design</title>
+        <meta title='desription' content={desc} />
+        <meta property='og:url' content='http://beresford-design.com/' />
+        <meta
+          property='og:title'
+          content='Beresford Design - A Creative Web Design Agency'
+        />
+        <meta property='og:description' content={desc} />
+        <meta property='og:image' content='https://i.imgur.com/7jTV5ql.png' />
+      </Helmet>
+      <div id='index'>
+        <main id='hero' onPointerMove={handlePointerMove}>
+          <Scene />
+        </main>
+      </div>
+    </>
   );
 };
 
