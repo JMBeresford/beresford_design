@@ -30,9 +30,11 @@ const IndexPage = () => {
           content='Beresford Design - A Creative Web Design Agency'
         />
         <meta property='og:description' content={desc} />
+        <meta property='og:type' content='website' />
         <meta property='og:image' content='https://i.imgur.com/7jTV5ql.png' />
         <meta property='og:image:width' content='1200' />
         <meta property='og:image:height' content='630' />
+        <meta name='theme-color' content='#ff9e9e' />
       </Helmet>
       <div id='index'>
         <main id='hero' onPointerMove={handlePointerMove}>

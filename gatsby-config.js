@@ -34,5 +34,17 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Beresford Design`,
+        short_name: `Beresford Design`,
+        start_url: `/`,
+        background_color: `#f1f6f9`,
+        theme_color: `#ff9e9e`,
+        display: `standalone`,
+        icon: 'src/images/favicon.png',
+      },
+    },
   ],
 };
