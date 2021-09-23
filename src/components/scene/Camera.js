@@ -11,6 +11,7 @@ const Camera = (props) => {
   const view = useStore((state) => state.view);
   const moving = useStore((state) => state.moving);
   const setMoving = useStore((state) => state.setMoving);
+  const setView = useStore((state) => state.setView);
 
   const isMobile = useMediaQuery({ maxWidth: '1200px' });
   var gammaRef = useRef(useStore.getState().gamma);
@@ -23,8 +24,12 @@ const Camera = (props) => {
               position: [0.34019, 1.12988, -0.72],
               rotation: [0, 0, 0],
             },
-            main: {
+            mainMobile: {
               position: [-1.1215, 1.4, 1.5],
+              rotation: [-0.23608012159022193, 0, 0],
+            },
+            main: {
+              position: [0, 1.4, 1.5],
               rotation: [-0.23608012159022193, 0, 0],
             },
             case1: {
@@ -77,47 +82,29 @@ const Camera = (props) => {
     [isMobile]
   );
 
-  const arrEquality = (a, b) => {
-    if (a === b) return true;
-    if (a == null || b == null) return false;
-    if (a.length !== b.length) return false;
-
-    for (var i = 0; i < a.length; ++i) {
-      if (a[i] !== b[i]) return false;
-    }
-    return true;
-  };
-
   const changeView = useCallback(
     (newView) => {
       let position = views[newView].position;
       let rotation = views[newView].rotation;
 
-      let dur = 1.5;
-      let ease = Power3.easeInOut;
-
-      if (arrEquality(ref.current.position.toArray(), views.landing.position)) {
-        dur = 3;
-        ease = Power1.easeOut;
-      }
-
       gsap.to(ref.current.rotation, {
-        duration: dur,
+        duration: 1.5,
         x: rotation[0],
         y: rotation[1],
         z: rotation[2],
-        ease: ease,
+        ease: Power1.easeInOut,
         onComplete: () => {
           setMoving(false);
+          if (isMobile && newView === 'main') setView('mainMobile');
         },
       });
 
       gsap.to(ref.current.position, {
-        duration: dur,
+        duration: 1.5,
         x: position[0],
         y: position[1],
         z: position[2],
-        ease: ease,
+        ease: Power1.easeInOut,
       });
     },
     [setMoving, views]

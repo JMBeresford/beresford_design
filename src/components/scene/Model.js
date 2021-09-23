@@ -209,10 +209,10 @@ export default function Model({ videos, ...props }) {
         duration: 1.5,
         opacity: 1,
         ease: Power1.easeOut,
-        delay: 3,
+        delay: 1,
       });
     }
-  }, [isMobile, experienceStarted]);
+  }, [experienceStarted]);
 
   useFrame(({ clock }) => {
     emailRef.current.material.uniforms.uTime.value = clock.elapsedTime;

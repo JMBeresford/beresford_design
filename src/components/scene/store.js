@@ -12,10 +12,7 @@ const store = (set, get) => ({
   },
   experienceStarted: false,
   startExperience: () => {
-    const setView = get().setView;
-
-    set(() => ({ experienceStarted: true }));
-    setView('main');
+    set(() => ({ experienceStarted: true, view: 'main', moving: true }));
   },
   loaded: false,
   setLoaded: () => {

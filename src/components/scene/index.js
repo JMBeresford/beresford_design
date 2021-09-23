@@ -8,6 +8,7 @@ import Camera from './Camera';
 import Cursor from './Cursor';
 import screenVid from '../../video/screenVid.mp4';
 import bdPreview from '../../video/beresfordDesignPreview.mp4';
+import { useMediaQuery } from 'react-responsive';
 
 const Scene = () => {
   const pixelRatio =
@@ -16,6 +17,7 @@ const Scene = () => {
   const setView = useStore((state) => state.setView);
   const experienceStarted = useStore((state) => state.experienceStarted);
   const setGamma = useStore((state) => state.setGamma);
+  const isMobile = useMediaQuery({ maxWidth: '1200px' });
 
   const vids = {
     idleScreen: null,
@@ -45,17 +47,26 @@ const Scene = () => {
   }
 
   const requestOrientationAccess = () => {
-    console.log('req');
     if (typeof DeviceOrientationEvent.requestPermission === 'function') {
       DeviceOrientationEvent.requestPermission()
         .then((permissionState) => {
           if (permissionState === 'granted') {
             window.addEventListener('deviceorientation', handleRotation);
+            window.screen.orientation
+              .lock(window.screen.orientation.type)
+              .catch((err) => {
+                console.error(err);
+              });
           }
         })
         .catch(console.error);
     } else {
       window.addEventListener('deviceorientation', handleRotation);
+      window.screen.orientation
+        .lock(window.screen.orientation.type)
+        .catch((err) => {
+          console.error(err);
+        });
     }
   };
 
@@ -83,7 +94,7 @@ const Scene = () => {
             onClick={() => {
               const el = document.querySelector('.cursor');
               if (!el.classList.contains('hovering') && experienceStarted) {
-                setView('main');
+                isMobile ? setView('mainMobile') : setView('main');
               }
             }}
             onWheel={() => {
@@ -92,7 +103,7 @@ const Scene = () => {
                 !el.classList.contains('hovering') === undefined &&
                 experienceStarted
               ) {
-                setView('main');
+                isMobile ? setView('mainMobile') : setView('main');
               }
             }}
             videos={vids}
