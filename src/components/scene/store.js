@@ -25,6 +25,10 @@ const store = (set, get) => ({
   setMoving: (moving) => {
     set(() => ({ moving: moving }));
   },
+  gamma: 0,
+  setGamma: (gamma) => {
+    set(() => ({ gamma: gamma }));
+  },
 });
 
 const useStore = create(store);

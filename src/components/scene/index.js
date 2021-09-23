@@ -1,5 +1,5 @@
-import React, { Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
+import React, { Suspense, useRef } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
 import Model from './Model';
 import FakeHero from '../FakeHero';
 import LoadingScreen from '../LoadingScreen';
@@ -15,10 +15,15 @@ const Scene = () => {
 
   const setView = useStore((state) => state.setView);
   const experienceStarted = useStore((state) => state.experienceStarted);
+  const setGamma = useStore((state) => state.setGamma);
 
   const vids = {
     idleScreen: null,
     bdPreview: null,
+  };
+
+  const handleRotation = (e) => {
+    setGamma(e.gamma);
   };
 
   if (typeof document !== 'undefined') {
@@ -39,10 +44,30 @@ const Scene = () => {
     vids.bdPreview.play();
   }
 
+  const requestOrientationAccess = () => {
+    console.log('req');
+    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+      DeviceOrientationEvent.requestPermission()
+        .then((permissionState) => {
+          if (permissionState === 'granted') {
+            window.addEventListener('deviceorientation', handleRotation);
+          }
+        })
+        .catch(console.error);
+    } else {
+      window.addEventListener('deviceorientation', handleRotation);
+    }
+  };
+
   return (
     <>
       <LoadingScreen />
-      {!experienceStarted && <FakeHero />}
+      {!experienceStarted && (
+        <FakeHero
+          onClick={requestOrientationAccess}
+          onTouchEnd={requestOrientationAccess}
+        />
+      )}
       {experienceStarted && <Cursor />}
       <Canvas
         id='heroCanvas'

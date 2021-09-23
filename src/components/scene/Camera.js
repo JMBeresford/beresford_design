@@ -13,7 +13,7 @@ const Camera = (props) => {
   const setMoving = useStore((state) => state.setMoving);
 
   const isMobile = useMediaQuery({ maxWidth: '1200px' });
-  var gamma = useRef(0);
+  var gammaRef = useRef(useStore.getState().gamma);
 
   const views = useMemo(
     () =>
@@ -88,11 +88,6 @@ const Camera = (props) => {
     return true;
   };
 
-  const handleRotation = (e) => {
-    console.log(e);
-    gamma.current = e.gamma;
-  };
-
   const changeView = useCallback(
     (newView) => {
       let position = views[newView].position;
@@ -132,8 +127,13 @@ const Camera = (props) => {
   useEffect(() => {
     ref.current.position.set(0.34019, 1.12988, -0.72);
     ref.current.lookAt(0.34019, 1.12988, -0.91913);
-    window.addEventListener('deviceorientation', handleRotation);
-    console.log(window.DeviceOrientationEvent);
+
+    useStore.subscribe(
+      (gamma) => {
+        gammaRef.current = gamma;
+      },
+      (state) => state.gamma
+    );
   }, []);
 
   // update config on view change
@@ -149,9 +149,9 @@ const Camera = (props) => {
       ref.current.rotation.x = views[view].rotation[0] + mouse.y * 0.05;
       ref.current.rotation.y = views[view].rotation[1] - mouse.x * 0.05;
     } else if (isMobile && view !== 'landing' && !moving) {
-      ref.current.position.x = views[view].position[0] - gamma.current / 540;
+      ref.current.position.x = views[view].position[0] - gammaRef.current / 540;
 
-      ref.current.rotation.y = views[view].rotation[1] - gamma.current / 540;
+      ref.current.rotation.y = views[view].rotation[1] - gammaRef.current / 540;
     }
   });
 

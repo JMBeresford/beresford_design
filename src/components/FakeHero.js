@@ -4,7 +4,7 @@ import gsap from 'gsap/all';
 import useStore from './scene/store';
 import logo from '../images/logo.svg';
 
-const FakeHero = () => {
+const FakeHero = (props) => {
   const [experienceStarted, startExperience] = useStore((state) => [
     state.experienceStarted,
     state.startExperience,
@@ -23,6 +23,7 @@ const FakeHero = () => {
       id='fakeHero'
       onWheel={delayInteractionUpdate}
       style={experienceStarted ? { display: 'none' } : {}}
+      {...props}
     >
       <Header handleInteract={delayInteractionUpdate} />
       <main>
