@@ -1,5 +1,5 @@
-import React, { Suspense, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import React, { Suspense } from 'react';
+import { Canvas } from '@react-three/fiber';
 import Model from './Model';
 import FakeHero from '../FakeHero';
 import LoadingScreen from '../LoadingScreen';
@@ -9,6 +9,7 @@ import Cursor from './Cursor';
 import screenVid from '../../video/screenVid.mp4';
 import bdPreview from '../../video/beresfordDesignPreview.mp4';
 import { useMediaQuery } from 'react-responsive';
+import { Stats } from '@react-three/drei';
 
 const Scene = () => {
   const pixelRatio =
@@ -16,7 +17,7 @@ const Scene = () => {
 
   const setView = useStore((state) => state.setView);
   const experienceStarted = useStore((state) => state.experienceStarted);
-  const setGamma = useStore((state) => state.setGamma);
+  const setRotation = useStore((state) => state.setRotation);
   const isMobile = useMediaQuery({ maxWidth: '1200px' });
 
   const vids = {
@@ -25,7 +26,7 @@ const Scene = () => {
   };
 
   const handleRotation = (e) => {
-    setGamma(e.gamma);
+    setRotation(e.alpha, e.beta, e.gamma);
   };
 
   if (typeof document !== 'undefined') {
@@ -62,14 +63,19 @@ const Scene = () => {
 
   return (
     <>
+      <Stats showPanel={0} className='stats' />
       <LoadingScreen />
       {!experienceStarted && (
         <FakeHero
           onClick={requestOrientationAccess}
           onTouchEnd={requestOrientationAccess}
+          onTouchStart={() => {
+            let el = document.querySelector('.cursorWrapper');
+            el.classList.add('mobile');
+          }}
         />
       )}
-      {experienceStarted && <Cursor />}
+      {<Cursor />}
       <Canvas
         id='heroCanvas'
         dpr={Math.min(pixelRatio, 2)}
@@ -81,10 +87,22 @@ const Scene = () => {
         <Camera fov={60} near={0.01} far={10} />
         <Suspense fallback={null}>
           <Model
-            onClick={() => {
+            onClick={(e) => {
               const el = document.querySelector('.cursor');
+              if (e.pointerType === 'mouse') {
+                document
+                  .querySelector('.cursorWrapper')
+                  .classList.remove('mobile');
+              }
               if (!el.classList.contains('hovering') && experienceStarted) {
                 isMobile ? setView('mainMobile') : setView('main');
+              }
+            }}
+            onPointerMove={(e) => {
+              if (e.pointerType === 'mouse') {
+                document
+                  .querySelector('.cursorWrapper')
+                  .classList.remove('mobile');
               }
             }}
             onWheel={() => {

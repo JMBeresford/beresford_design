@@ -4,6 +4,7 @@ import { PerspectiveCamera } from '@react-three/drei';
 import { gsap, Power1, Power3 } from 'gsap';
 import useStore from './store';
 import { useMediaQuery } from 'react-responsive';
+import { Euler, Vector3 } from 'three';
 
 const Camera = (props) => {
   const ref = useRef();
@@ -14,7 +15,9 @@ const Camera = (props) => {
   const setView = useStore((state) => state.setView);
 
   const isMobile = useMediaQuery({ maxWidth: '1200px' });
-  var gammaRef = useRef(useStore.getState().gamma);
+  var rotationRef = useRef(useStore.getState().rotation);
+  var vecRef = useRef(new Vector3(0, 0, 0));
+  var eulerRef = useRef(new Euler(0, 0, 0, 'ZXY'));
 
   const views = useMemo(
     () =>
@@ -116,10 +119,10 @@ const Camera = (props) => {
     ref.current.lookAt(0.34019, 1.12988, -0.91913);
 
     useStore.subscribe(
-      (gamma) => {
-        gammaRef.current = gamma;
+      (rotation) => {
+        rotationRef.current = rotation;
       },
-      (state) => state.gamma
+      (state) => state.rotation
     );
   }, []);
 
@@ -136,9 +139,13 @@ const Camera = (props) => {
       ref.current.rotation.x = views[view].rotation[0] + mouse.y * 0.05;
       ref.current.rotation.y = views[view].rotation[1] - mouse.x * 0.05;
     } else if (isMobile && view !== 'landing' && !moving) {
-      ref.current.position.x = views[view].position[0] + gammaRef.current / 360;
+      eulerRef.current.fromArray(views[view].rotation);
 
-      ref.current.rotation.y = views[view].rotation[1] + gammaRef.current / 360;
+      eulerRef.current.x += (rotationRef.current.b * Math.PI) / 180;
+      eulerRef.current.y += (rotationRef.current.g * Math.PI) / 180;
+      eulerRef.current.z += (rotationRef.current.a * Math.PI) / 180;
+
+      ref.current.rotation.copy(eulerRef.current);
     }
   });
 

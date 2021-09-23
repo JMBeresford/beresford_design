@@ -5,7 +5,7 @@ const Cursor = () => {
   const isMobile = useMediaQuery({ maxWidth: '1200px' });
 
   return (
-    <div className={isMobile ? 'cursorWrapper mobile' : 'cursorWrapper'}>
+    <div className='cursorWrapper mobile'>
       <div className='cursor'>
         <div className='ripple' />
       </div>
