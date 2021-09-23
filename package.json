@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "develop": "gatsby develop -H 0.0.0.0",
+    "developsecure": "HTTP=true SSL_CRT_FILE=cert.pem SSL_KEY_FILE=key.pem gatsby develop -H 0.0.0.0",
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
