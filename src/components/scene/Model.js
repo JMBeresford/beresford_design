@@ -104,7 +104,7 @@ export default function Model({ videos, ...props }) {
   };
 
   const emailClicked = (e) => {
-    if (view === 'socials') {
+    if (view === 'socials' || isMobile) {
       window.open(
         'mailto:consult@beresforddesign.net?subject=Inquiry From Portfolio'
       );
@@ -114,7 +114,7 @@ export default function Model({ videos, ...props }) {
   };
 
   const instaClicked = (e) => {
-    if (view === 'socials') {
+    if (view === 'socials' || isMobile) {
       window.open('http://instagram.com/beresforddesign/');
     } else {
       setView('socials');
@@ -122,7 +122,7 @@ export default function Model({ videos, ...props }) {
   };
 
   const linkedinClicked = (e) => {
-    if (view === 'socials') {
+    if (view === 'socials' || isMobile) {
       window.open('http://linkedin.com/in/JMBeresford');
     } else {
       setView('socials');
@@ -130,7 +130,7 @@ export default function Model({ videos, ...props }) {
   };
 
   const githubClicked = (e) => {
-    if (view === 'socials') {
+    if (view === 'socials' || isMobile) {
       window.open('http://github.com/JMBeresford');
     } else {
       setView('socials');

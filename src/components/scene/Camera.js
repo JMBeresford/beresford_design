@@ -28,16 +28,16 @@ const Camera = (props) => {
               rotation: [-0.23608012159022193, 0, 0],
             },
             case1: {
-              position: [-1.1, 1.58, -0.22],
-              rotation: [-0.257, 0, 0],
+              position: [-1.26527, 1.5, -0.25],
+              rotation: [-0.287, 0.13, 0],
             },
             case2: {
-              position: [-1.1, 1.22, -0.22],
-              rotation: [-0.257, 0, 0],
+              position: [-0.9778, 1.1, -0.25],
+              rotation: [-0.287, -0.13, 0],
             },
             case3: {
-              position: [-1.1, 0.86, -0.22],
-              rotation: [-0.257, 0, 0],
+              position: [-1.26527, 0.78, -0.25],
+              rotation: [-0.287, 0.13, 0],
             },
             socials: {
               position: [-1.03, 1.87, 0],
@@ -149,9 +149,9 @@ const Camera = (props) => {
       ref.current.rotation.x = views[view].rotation[0] + mouse.y * 0.05;
       ref.current.rotation.y = views[view].rotation[1] - mouse.x * 0.05;
     } else if (isMobile && view !== 'landing' && !moving) {
-      ref.current.position.x = views[view].position[0] - gammaRef.current / 540;
+      ref.current.position.x = views[view].position[0] + gammaRef.current / 360;
 
-      ref.current.rotation.y = views[view].rotation[1] - gammaRef.current / 540;
+      ref.current.rotation.y = views[view].rotation[1] + gammaRef.current / 360;
     }
   });
 
