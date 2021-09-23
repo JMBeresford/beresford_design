@@ -9,7 +9,7 @@ import Cursor from './Cursor';
 import screenVid from '../../video/screenVid.mp4';
 import bdPreview from '../../video/beresfordDesignPreview.mp4';
 
-const Scene = (props) => {
+const Scene = () => {
   const pixelRatio =
     typeof window !== 'undefined' ? window.devicePixelRatio : 1;
 

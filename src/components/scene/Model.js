@@ -18,6 +18,7 @@ import bake5 from '../../images/bakes/bake5.jpg';
 import bake6 from '../../images/bakes/bake6.jpg';
 import bake7 from '../../images/bakes/bake7.jpg';
 import bake8 from '../../images/bakes/bake8.jpg';
+import { useMediaQuery } from 'react-responsive';
 
 const EmissiveCubeMaterial = shaderMaterial(
   {
@@ -45,6 +46,8 @@ export default function Model({ videos, ...props }) {
   const setView = useStore((state) => state.setView);
   const view = useStore((state) => state.view);
   const experienceStarted = useStore((state) => state.experienceStarted);
+
+  const isMobile = useMediaQuery({ maxWidth: '1200px' });
 
   // LOAD TEXTURES AND CONFIG MATERIALS
   const bakedTex2 = useTexture(bake2);
@@ -135,6 +138,8 @@ export default function Model({ videos, ...props }) {
   };
 
   const handlePointerEnter = (e) => {
+    if (isMobile) return;
+
     const mesh = e.object;
     const tooltip = document.querySelector('.tooltipContent');
     const cursor = document.querySelector('.cursor');
@@ -165,6 +170,8 @@ export default function Model({ videos, ...props }) {
   };
 
   const handlePointerOut = (e) => {
+    if (isMobile) return;
+
     const mesh = e.object;
     const cursor = document.querySelector('.cursor');
 
@@ -197,15 +204,15 @@ export default function Model({ videos, ...props }) {
   }, []);
 
   useEffect(() => {
-    if (experienceStarted) {
+    if (!isMobile && experienceStarted) {
       gsap.to(monitor.current.material, {
         duration: 1.5,
         opacity: 1,
         ease: Power1.easeOut,
-        delay: 1.5,
+        delay: 3,
       });
     }
-  }, [experienceStarted]);
+  }, [isMobile, experienceStarted]);
 
   useFrame(({ clock }) => {
     emailRef.current.material.uniforms.uTime.value = clock.elapsedTime;
@@ -213,8 +220,6 @@ export default function Model({ videos, ...props }) {
       clock.elapsedTime + 0.25;
     linkedInRef.current.material.uniforms.uTime.value = clock.elapsedTime + 0.5;
     githubRef.current.material.uniforms.uTime.value = clock.elapsedTime + 0.75;
-
-    emailRef.current.material.uniformsNeedUpdate = true;
   });
 
   // LOAD GLTF
@@ -239,15 +244,17 @@ export default function Model({ videos, ...props }) {
         position={[0.34019, 1.12988, -0.91913]}
         ref={monitor}
       >
-        <meshBasicMaterial transparent={false} opacity={0}>
-          <videoTexture
-            attach='map'
-            args={[videos.idleScreen]}
-            flipY={false}
-            encoding={sRGBEncoding}
-            center={[0.5, 0.5]}
-            repeat={[0.9, 1.6]}
-          />
+        <meshBasicMaterial opacity={0}>
+          {isMobile ? null : (
+            <videoTexture
+              attach='map'
+              args={[videos.idleScreen]}
+              flipY={false}
+              encoding={sRGBEncoding}
+              center={[0.5, 0.5]}
+              repeat={[0.9, 1.6]}
+            />
+          )}
         </meshBasicMaterial>
       </mesh>
       <mesh
@@ -450,4 +457,4 @@ export default function Model({ videos, ...props }) {
   );
 }
 
-useGLTF.preload('/beresford_design.glb');
+useGLTF.preload('beresford_design.glb');

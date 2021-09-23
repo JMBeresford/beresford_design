@@ -1,18 +1,10 @@
 import React from 'react';
 import Header from './Header';
-import { useStaticQuery, graphql } from 'gatsby';
 import gsap from 'gsap/all';
 import useStore from './scene/store';
+import logo from '../images/logo.svg';
 
 const FakeHero = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      logo: file(relativePath: { eq: "logo.svg" }) {
-        publicURL
-      }
-    }
-  `);
-
   const [experienceStarted, startExperience] = useStore((state) => [
     state.experienceStarted,
     state.startExperience,
@@ -45,11 +37,7 @@ const FakeHero = () => {
             <button onClick={delayInteractionUpdate}>Get Yours</button>
           </div>
         </div>
-        <img
-          className='logo'
-          src={data.logo.publicURL}
-          alt='Beresford Design Logo'
-        />
+        <img className='logo' src={logo} alt='Beresford Design Logo' />
       </main>
     </div>
   );

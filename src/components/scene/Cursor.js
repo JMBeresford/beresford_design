@@ -1,12 +1,11 @@
 import React from 'react';
-import useStore from './store';
+import { useMediaQuery } from 'react-responsive';
 
 const Cursor = () => {
-  const hovering = useStore((state) => state.hovering);
-  const view = useStore((state) => state.view);
+  const isMobile = useMediaQuery({ maxWidth: '1200px' });
 
   return (
-    <div className='cursorWrapper'>
+    <div className={isMobile ? 'cursorWrapper mobile' : 'cursorWrapper'}>
       <div className='cursor'>
         <div className='ripple' />
       </div>
