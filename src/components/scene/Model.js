@@ -7,7 +7,7 @@ import { useGLTF, useTexture, shaderMaterial } from '@react-three/drei';
 import model from './beresford_design.glb';
 import useStore from './store';
 import { gsap, Power1 } from 'gsap';
-import { extend, useFrame } from '@react-three/fiber';
+import { extend, useFrame, useThree } from '@react-three/fiber';
 import { Color, sRGBEncoding } from 'three';
 import emissiveVertexShader from '../../shaders/emissiveCube/emissiveCube.vert';
 import emissiveFragmentShader from '../../shaders/emissiveCube/emissiveCube.frag';
@@ -41,9 +41,11 @@ export default function Model({ videos, ...props }) {
   const instagramRef = useRef();
   const linkedInRef = useRef();
   const githubRef = useRef();
+  const size = useThree((state) => state.size);
 
   const setLoaded = useStore((state) => state.setLoaded);
   const setView = useStore((state) => state.setView);
+  const setTouchCoords = useStore((state) => state.setTouchCoords);
   const view = useStore((state) => state.view);
   const experienceStarted = useStore((state) => state.experienceStarted);
 
@@ -201,6 +203,8 @@ export default function Model({ videos, ...props }) {
   // EFFECTS
   useEffect(() => {
     setLoaded();
+
+    setTouchCoords(size.width / 2, size.height / 2);
   }, []);
 
   useEffect(() => {

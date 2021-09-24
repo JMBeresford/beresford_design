@@ -137,14 +137,14 @@ const Camera = (props) => {
       ref.current.rotation.x = views[view].rotation[0] + mouse.y * 0.05;
       ref.current.rotation.y = views[view].rotation[1] - mouse.x * 0.05;
     } else if (isMobile && view !== 'landing' && !moving) {
-      let x = (touchRef.current.x / size.width) * 2 + 1;
-      let y = (touchRef.current.y / size.height) * 2 + 1;
+      let x = (touchRef.current.x / size.width) * 2 - 1;
+      let y = (touchRef.current.y / size.height) * 2 - 1;
 
-      ref.current.position.x = views[view].position[0] - x * 0.05;
-      ref.current.position.y = views[view].position[1] - y * 0.05;
+      ref.current.position.x = views[view].position[0] - x * 0.1;
+      ref.current.position.y = views[view].position[1] - y * 0.1;
 
-      ref.current.rotation.x = views[view].rotation[0] + y * 0.05;
-      ref.current.rotation.y = views[view].rotation[1] - x * 0.05;
+      ref.current.rotation.x = views[view].rotation[0] + y * 0.1;
+      ref.current.rotation.y = views[view].rotation[1] - x * 0.1;
     }
   });
 

@@ -47,34 +47,12 @@ const Scene = () => {
     vids.bdPreview.play();
   }
 
-  const requestOrientationAccess = () => {
-    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-      DeviceOrientationEvent.requestPermission()
-        .then((permissionState) => {
-          if (permissionState === 'granted') {
-            window.addEventListener('deviceorientation', handleRotation);
-            window.screen.orientation.lock('portrait-primary').catch((err) => {
-              console.error(err);
-            });
-          }
-        })
-        .catch(console.error);
-    } else {
-      window.addEventListener('deviceorientation', handleRotation);
-      window.screen.orientation.lock('portrait-primary').catch((err) => {
-        console.error(err);
-      });
-    }
-  };
-
   return (
     <>
       <Stats showPanel={0} className='stats' />
       <LoadingScreen />
       {!experienceStarted && (
         <FakeHero
-          onClick={requestOrientationAccess}
-          onTouchEnd={requestOrientationAccess}
           onTouchStart={() => {
             let el = document.querySelector('.cursorWrapper');
             el.classList.add('mobile');
