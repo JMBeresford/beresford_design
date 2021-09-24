@@ -149,7 +149,6 @@ const Camera = (props) => {
       quatRef.current.setFromEuler(eulerRef.current);
 
       ref.current.quaternion.copy(quatRef.current);
-      ref.current.rotation.x = views[view].rotation[0];
       ref.current.rotation.z = views[view].rotation[2];
     }
   });
