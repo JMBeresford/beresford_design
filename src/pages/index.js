@@ -2,15 +2,28 @@ import React, { useEffect } from 'react';
 import '../styles/main.scss';
 import Scene from '../components/scene/';
 import { Helmet } from 'react-helmet';
+import useStore from '../components/scene/store';
 
-// markup
 const IndexPage = () => {
+  const setTouchCoords = useStore((state) => state.setTouchCoords);
+
   const handlePointerMove = (e) => {
     let el = document.querySelector('.cursor');
 
     if (el !== null) {
       document.querySelector('.cursorWrapper').style.top = `${e.clientY}px`;
       document.querySelector('.cursorWrapper').style.left = `${e.clientX}px`;
+    }
+  };
+
+  const handleTouch = (e) => {
+    console.log(e);
+
+    if (e.touches.length === 1) {
+      let x = e.touches[0].clientX;
+      let y = e.touches[0].clientY;
+
+      setTouchCoords(x, y);
     }
   };
 
@@ -34,7 +47,11 @@ const IndexPage = () => {
         <meta name='theme-color' content='#ff9e9e' />
       </Helmet>
       <div id='index'>
-        <main id='hero' onPointerMove={handlePointerMove}>
+        <main
+          id='hero'
+          onPointerMove={handlePointerMove}
+          onTouchMove={handleTouch}
+        >
           <Scene />
         </main>
       </div>

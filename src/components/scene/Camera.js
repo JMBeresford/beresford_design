@@ -14,7 +14,7 @@ const Camera = (props) => {
   const setView = useStore((state) => state.setView);
 
   const isMobile = useMediaQuery({ maxWidth: '1200px' });
-  var rotationRef = useRef(useStore.getState().rotation);
+  var touchRef = useRef(useStore.getState().touchCoords);
 
   const views = useMemo(
     () =>
@@ -117,10 +117,10 @@ const Camera = (props) => {
     ref.current.rotation.reorder('YXZ');
 
     useStore.subscribe(
-      (rotation) => {
-        rotationRef.current = rotation;
+      (coords) => {
+        touchRef.current = coords;
       },
-      (state) => state.rotation
+      (state) => state.touchCoords
     );
   }, []);
 
@@ -129,7 +129,7 @@ const Camera = (props) => {
     changeView(view);
   }, [view]);
 
-  useFrame(({ mouse }) => {
+  useFrame(({ mouse, size }) => {
     if (!isMobile && view !== 'landing' && !moving) {
       ref.current.position.x = views[view].position[0] - mouse.x * 0.05;
       ref.current.position.y = views[view].position[1] - mouse.y * 0.05;
@@ -137,6 +137,14 @@ const Camera = (props) => {
       ref.current.rotation.x = views[view].rotation[0] + mouse.y * 0.05;
       ref.current.rotation.y = views[view].rotation[1] - mouse.x * 0.05;
     } else if (isMobile && view !== 'landing' && !moving) {
+      let x = (touchRef.current.x / size.width) * 2 + 1;
+      let y = (touchRef.current.y / size.height) * 2 + 1;
+
+      ref.current.position.x = views[view].position[0] - x * 0.05;
+      ref.current.position.y = views[view].position[1] - y * 0.05;
+
+      ref.current.rotation.x = views[view].rotation[0] + y * 0.05;
+      ref.current.rotation.y = views[view].rotation[1] - x * 0.05;
     }
   });
 

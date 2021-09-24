@@ -22,9 +22,9 @@ const store = (set, get) => ({
   setMoving: (moving) => {
     set(() => ({ moving: moving }));
   },
-  rotation: { a: 0, b: 0, g: 0 },
-  setRotation: (a, b, g) => {
-    set(() => ({ rotation: { a: a, b: b, g } }));
+  touchCoords: { x: 0, y: 0 },
+  setTouchCoords: (x, y) => {
+    set(() => ({ touchCoords: { x, y } }));
   },
 });
 
