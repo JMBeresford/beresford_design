@@ -53,11 +53,17 @@ const Scene = () => {
         .then((permissionState) => {
           if (permissionState === 'granted') {
             window.addEventListener('deviceorientation', handleRotation);
+            window.screen.orientation.lock('portrait-primary').catch((err) => {
+              console.error(err);
+            });
           }
         })
         .catch(console.error);
     } else {
       window.addEventListener('deviceorientation', handleRotation);
+      window.screen.orientation.lock('portrait-primary').catch((err) => {
+        console.error(err);
+      });
     }
   };
 
