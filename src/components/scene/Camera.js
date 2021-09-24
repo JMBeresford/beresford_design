@@ -17,7 +17,7 @@ const Camera = (props) => {
   const isMobile = useMediaQuery({ maxWidth: '1200px' });
   var rotationRef = useRef(useStore.getState().rotation);
   var quatRef = useRef(new Quaternion(0, 0, 0, 0));
-  var eulerRef = useRef(new Euler(0, 0, 0, 'YZX'));
+  var eulerRef = useRef(new Euler(0, 0, 0, 'YXZ'));
 
   const views = useMemo(
     () =>
@@ -117,7 +117,7 @@ const Camera = (props) => {
   useEffect(() => {
     ref.current.position.set(0.34019, 1.12988, -0.72);
     ref.current.lookAt(0.34019, 1.12988, -0.91913);
-    ref.current.rotation.reorder('YZX');
+    ref.current.rotation.reorder('YXZ');
 
     useStore.subscribe(
       (rotation) => {
