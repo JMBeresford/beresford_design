@@ -4,7 +4,6 @@ import { PerspectiveCamera } from '@react-three/drei';
 import { gsap, Power1, Power3 } from 'gsap';
 import useStore from './store';
 import { useMediaQuery } from 'react-responsive';
-import { Euler, Quaternion, Vector3 } from 'three';
 
 const Camera = (props) => {
   const ref = useRef();
@@ -16,7 +15,6 @@ const Camera = (props) => {
 
   const isMobile = useMediaQuery({ maxWidth: '1200px' });
   var rotationRef = useRef(useStore.getState().rotation);
-  var eulerRef = useRef(new Euler(0, 0, 0, 'YXZ'));
 
   const views = useMemo(
     () =>
@@ -139,11 +137,6 @@ const Camera = (props) => {
       ref.current.rotation.x = views[view].rotation[0] + mouse.y * 0.05;
       ref.current.rotation.y = views[view].rotation[1] - mouse.x * 0.05;
     } else if (isMobile && view !== 'landing' && !moving) {
-      eulerRef.current.x = ((rotationRef.current.b * Math.PI) / 180) * 0.25;
-      eulerRef.current.y = ((rotationRef.current.g * Math.PI) / 180) * 0.25;
-      eulerRef.current.z = ((rotationRef.current.a * Math.PI) / 180) * 0.25;
-
-      ref.current.rotation.copy(eulerRef.current);
     }
   });
 
