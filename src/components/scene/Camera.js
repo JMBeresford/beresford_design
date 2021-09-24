@@ -17,7 +17,7 @@ const Camera = (props) => {
   const isMobile = useMediaQuery({ maxWidth: '1200px' });
   var rotationRef = useRef(useStore.getState().rotation);
   var vecRef = useRef(new Vector3(0, 0, 0));
-  var eulerRef = useRef(new Euler(0, 0, 0, 'ZXY'));
+  var eulerRef = useRef(new Euler(0, 0, 0, 'YXZ'));
 
   const views = useMemo(
     () =>
