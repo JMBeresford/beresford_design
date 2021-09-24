@@ -24,7 +24,7 @@ const store = (set, get) => ({
   },
   rotation: { a: 0, b: 0, g: 0 },
   setRotation: (a, b, g) => {
-    set(() => ({ rotation: { a: 0, b, g } }));
+    set(() => ({ rotation: { a: 0, b: b - 90, g } }));
   },
 });
 

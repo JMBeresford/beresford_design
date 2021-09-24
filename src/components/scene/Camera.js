@@ -141,9 +141,7 @@ const Camera = (props) => {
     } else if (isMobile && view !== 'landing' && !moving) {
       eulerRef.current.fromArray(views[view].rotation);
 
-      eulerRef.current.x += (rotationRef.current.b * Math.PI) / 180;
-      eulerRef.current.y += (rotationRef.current.g * Math.PI) / 180;
-      eulerRef.current.z += (rotationRef.current.a * Math.PI) / 180;
+      eulerRef.current.y += ((rotationRef.current.g * Math.PI) / 180) * 0.25;
 
       ref.current.rotation.copy(eulerRef.current);
     }
