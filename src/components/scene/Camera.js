@@ -140,11 +140,9 @@ const Camera = (props) => {
       ref.current.rotation.x = views[view].rotation[0] + mouse.y * 0.05;
       ref.current.rotation.y = views[view].rotation[1] - mouse.x * 0.05;
     } else if (isMobile && view !== 'landing' && !moving) {
-      eulerRef.current.fromArray(views[view].rotation);
-
-      eulerRef.current.x += ((rotationRef.current.b * Math.PI) / 180) * 0.25;
-      eulerRef.current.y += ((rotationRef.current.g * Math.PI) / 180) * 0.25;
-      eulerRef.current.z += ((rotationRef.current.a * Math.PI) / 180) * 0.25;
+      eulerRef.current.x = (rotationRef.current.b * Math.PI) / 180;
+      eulerRef.current.y = (rotationRef.current.g * Math.PI) / 180;
+      eulerRef.current.z = (rotationRef.current.a * Math.PI) / 180;
 
       quatRef.current.setFromEuler(eulerRef.current);
 
