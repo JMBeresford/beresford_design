@@ -16,7 +16,6 @@ const Camera = (props) => {
 
   const isMobile = useMediaQuery({ maxWidth: '1200px' });
   var rotationRef = useRef(useStore.getState().rotation);
-  var quatRef = useRef(new Quaternion(0, 0, 0, 0));
   var eulerRef = useRef(new Euler(0, 0, 0, 'YXZ'));
 
   const views = useMemo(
@@ -140,15 +139,11 @@ const Camera = (props) => {
       ref.current.rotation.x = views[view].rotation[0] + mouse.y * 0.05;
       ref.current.rotation.y = views[view].rotation[1] - mouse.x * 0.05;
     } else if (isMobile && view !== 'landing' && !moving) {
-      eulerRef.current.x = (rotationRef.current.b * Math.PI) / 180;
-      eulerRef.current.y = (rotationRef.current.g * Math.PI) / 180;
-      eulerRef.current.z = (rotationRef.current.a * Math.PI) / 180;
+      eulerRef.current.x = ((rotationRef.current.b * Math.PI) / 180) * 0.25;
+      eulerRef.current.y = ((rotationRef.current.g * Math.PI) / 180) * 0.25;
+      eulerRef.current.z = ((rotationRef.current.a * Math.PI) / 180) * 0.25;
 
-      quatRef.current.setFromEuler(eulerRef.current);
-
-      ref.current.quaternion.copy(quatRef.current);
-      ref.current.rotation.x = views[view].rotation[0];
-      ref.current.rotation.z = views[view].rotation[2];
+      ref.current.rotation.copy(eulerRef.current);
     }
   });
 
