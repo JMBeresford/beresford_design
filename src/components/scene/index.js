@@ -8,8 +8,8 @@ import Camera from './Camera';
 import Cursor from './Cursor';
 import screenVid from '../../video/screenVid.mp4';
 import bdPreview from '../../video/beresfordDesignPreview.mp4';
-import { useMediaQuery } from 'react-responsive';
 import { Stats } from '@react-three/drei';
+import Tooltip from '../Tooltip';
 
 const Scene = () => {
   const pixelRatio =
@@ -17,16 +17,10 @@ const Scene = () => {
 
   const setView = useStore((state) => state.setView);
   const experienceStarted = useStore((state) => state.experienceStarted);
-  const setRotation = useStore((state) => state.setRotation);
-  const isMobile = useMediaQuery({ maxWidth: '1200px' });
 
   const vids = {
     idleScreen: null,
     bdPreview: null,
-  };
-
-  const handleRotation = (e) => {
-    setRotation(e.alpha, e.beta, e.gamma);
   };
 
   if (typeof document !== 'undefined') {
@@ -51,18 +45,17 @@ const Scene = () => {
     <>
       <Stats showPanel={0} className='stats' />
       <LoadingScreen />
-      {!experienceStarted && (
-        <FakeHero
-          onTouchStart={() => {
-            let el = document.querySelector('.cursorWrapper');
-            el.classList.add('mobile');
-          }}
-        />
-      )}
+      <FakeHero
+        onTouchStart={() => {
+          let el = document.querySelector('.cursorWrapper');
+          el.classList.add('mobile');
+        }}
+      />
       {<Cursor />}
       <Canvas
         id='heroCanvas'
         dpr={Math.min(pixelRatio, 2)}
+        mode='concurrent'
         gl={{ alpha: true }}
         onCreated={(state) => {
           state.gl.setClearAlpha('#f1f6f9');
@@ -79,7 +72,7 @@ const Scene = () => {
                   .classList.remove('mobile');
               }
               if (!el.classList.contains('hovering') && experienceStarted) {
-                isMobile ? setView('mainMobile') : setView('main');
+                setView('main');
               }
             }}
             onPointerMove={(e) => {
@@ -95,13 +88,14 @@ const Scene = () => {
                 !el.classList.contains('hovering') === undefined &&
                 experienceStarted
               ) {
-                isMobile ? setView('mainMobile') : setView('main');
+                setView('main');
               }
             }}
             videos={vids}
           />
         </Suspense>
       </Canvas>
+      <Tooltip />
     </>
   );
 };

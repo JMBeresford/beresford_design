@@ -331,6 +331,7 @@ body {
   place-self: center end;
   height: 100%;
 }
+
 @media (max-width: 1200px) {
   #fakeHero header nav {
     width: 90%;
@@ -344,9 +345,19 @@ body {
     width: 100%;
     grid-column: 3/4;
   }
-  #fakeHero main .buttons button {
-    font-size: 1.2rem;
-    padding: 0.5rem 1rem;
+  #fakeHero main .heroText .buttons {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 0;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  #fakeHero main .heroText .buttons button {
+    font-size: 1.5rem;
+    padding: 1rem 1.2rem;
   }
 }
 @media (max-width: 760px) {
@@ -357,7 +368,6 @@ body {
     display: none;
   }
 }
-
 #hero {
   height: 100%;
   width: 100%;
@@ -448,6 +458,29 @@ body {
   font-size: 1.2rem;
   font-weight: 600;
   white-space: nowrap;
+}
+
+.globalTooltip {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  z-index: 2;
+  color: #f1f6f9;
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 7px;
+  -webkit-transform-origin: left center;
+          transform-origin: left center;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+.globalTooltip.hide {
+  -webkit-transform: translateY(10vh);
+          transform: translateY(10vh);
 }
 
 @-webkit-keyframes cursorAnimation {

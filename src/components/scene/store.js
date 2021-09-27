@@ -14,6 +14,9 @@ const store = (set, get) => ({
   startExperience: () => {
     set(() => ({ experienceStarted: true, view: 'main', moving: true }));
   },
+  startExperienceMobile: () => {
+    set({ experienceStarted: true, view: 'beforeMain', moving: true });
+  },
   loaded: false,
   setLoaded: () => {
     set(() => ({ loaded: true }));
@@ -21,10 +24,6 @@ const store = (set, get) => ({
   moving: false,
   setMoving: (moving) => {
     set(() => ({ moving: moving }));
-  },
-  touchCoords: { x: 0, y: 0 },
-  setTouchCoords: (x, y) => {
-    set(() => ({ touchCoords: { x, y } }));
   },
 });
 

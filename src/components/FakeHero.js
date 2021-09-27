@@ -3,18 +3,34 @@ import Header from './Header';
 import gsap from 'gsap/all';
 import useStore from './scene/store';
 import logo from '../images/logo.svg';
+import { useMediaQuery } from 'react-responsive';
 
 const FakeHero = (props) => {
-  const [experienceStarted, startExperience] = useStore((state) => [
-    state.experienceStarted,
-    state.startExperience,
-  ]);
+  const [experienceStarted, startExperience, startExperienceMobile] = useStore(
+    (state) => [
+      state.experienceStarted,
+      state.startExperience,
+      state.startExperienceMobile,
+    ]
+  );
+
+  const isMobile = useMediaQuery({ maxWidth: '1200px' });
+
+  const handleStartExperience = () => {
+    if (isMobile) {
+      startExperienceMobile();
+    } else {
+      startExperience();
+    }
+  };
 
   const delayInteractionUpdate = () => {
     gsap.to('#fakeHero', {
       opacity: 0,
       duration: 1,
-      onComplete: startExperience,
+      onComplete: () => {
+        handleStartExperience();
+      },
     });
   };
 

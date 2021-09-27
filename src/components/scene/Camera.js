@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { PerspectiveCamera } from '@react-three/drei';
-import { gsap, Power1, Power3 } from 'gsap';
+import { gsap, Power2 } from 'gsap';
 import useStore from './store';
 import { useMediaQuery } from 'react-responsive';
 
@@ -14,23 +14,22 @@ const Camera = (props) => {
   const setView = useStore((state) => state.setView);
 
   const isMobile = useMediaQuery({ maxWidth: '1200px' });
-  var touchRef = useRef(useStore.getState().touchCoords);
 
   const views = useMemo(
     () =>
       isMobile
         ? {
             landing: {
-              position: [0.34019, 1.12988, -0.72],
-              rotation: [0, 0, 0],
+              position: [0.01893, 0.8, -0.80597],
+              rotation: [-Math.PI / 2, 0, 0.08],
             },
-            mainMobile: {
+            main: {
               position: [-1.1215, 1.4, 1.5],
               rotation: [-0.23608012159022193, 0, 0],
             },
-            main: {
-              position: [0, 1.4, 1.5],
-              rotation: [-0.23608012159022193, 0, 0],
+            beforeMain: {
+              position: [0.01893, 1.4, -0.80597],
+              rotation: [-Math.PI / 2, 0, 0.08],
             },
             case1: {
               position: [-1.26527, 1.5, -0.25],
@@ -45,7 +44,7 @@ const Camera = (props) => {
               rotation: [-0.287, 0.13, 0],
             },
             socials: {
-              position: [-1.03, 1.87, 0],
+              position: [-1.03, 1.87, -0.22],
               rotation: [
                 -0.3302973548292537, 0.0943139513271806, 0.03227708057782552,
               ],
@@ -87,41 +86,38 @@ const Camera = (props) => {
       let position = views[newView].position;
       let rotation = views[newView].rotation;
 
+      const dur = newView === 'beforeMain' ? 3 : 1.5;
+
       gsap.to(ref.current.rotation, {
-        duration: 1.5,
+        duration: dur,
         x: rotation[0],
         y: rotation[1],
         z: rotation[2],
-        ease: Power1.easeInOut,
+        ease: Power2.easeInOut,
         onComplete: () => {
           setMoving(false);
-          if (isMobile && newView === 'main') setView('mainMobile');
+          if (newView === 'beforeMain') {
+            setView('main');
+          }
         },
       });
 
       gsap.to(ref.current.position, {
-        duration: 1.5,
+        duration: dur,
         x: position[0],
         y: position[1],
         z: position[2],
-        ease: Power1.easeInOut,
+        ease: Power2.easeInOut,
       });
     },
-    [setMoving, views]
+    [views]
   );
 
   // initial config
   useEffect(() => {
-    ref.current.position.set(0.34019, 1.12988, -0.72);
-    ref.current.lookAt(0.34019, 1.12988, -0.91913);
+    ref.current.position.set([...views['landing'].position]);
+    ref.current.rotation.set([...views['landing'].rotation]);
     ref.current.rotation.reorder('YXZ');
-
-    useStore.subscribe(
-      (coords) => {
-        touchRef.current = coords;
-      },
-      (state) => state.touchCoords
-    );
   }, []);
 
   // update config on view change
@@ -129,22 +125,13 @@ const Camera = (props) => {
     changeView(view);
   }, [view]);
 
-  useFrame(({ mouse, size }) => {
+  useFrame(({ mouse }) => {
     if (!isMobile && view !== 'landing' && !moving) {
       ref.current.position.x = views[view].position[0] - mouse.x * 0.05;
       ref.current.position.y = views[view].position[1] - mouse.y * 0.05;
 
       ref.current.rotation.x = views[view].rotation[0] + mouse.y * 0.05;
       ref.current.rotation.y = views[view].rotation[1] - mouse.x * 0.05;
-    } else if (isMobile && view !== 'landing' && !moving) {
-      let x = (touchRef.current.x / size.width) * 2 - 1;
-      let y = (touchRef.current.y / size.height) * 2 - 1;
-
-      ref.current.position.x = views[view].position[0] - x * 0.1;
-      ref.current.position.y = views[view].position[1] - y * 0.1;
-
-      ref.current.rotation.x = views[view].rotation[0] + y * 0.1;
-      ref.current.rotation.y = views[view].rotation[1] - x * 0.1;
     }
   });
 

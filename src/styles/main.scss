@@ -1,5 +1,5 @@
-@use "./colors" as *;
-@use "./fonts";
+@use './colors' as *;
+@use './fonts';
 @use 'sass:color';
 
 $breakpoint-tablet: 1200px;
@@ -281,8 +281,10 @@ body {
       height: 100%;
     }
   }
+}
 
-  @media (max-width: $breakpoint-tablet) {
+@media (max-width: $breakpoint-tablet) {
+  #fakeHero {
     header {
       nav {
         width: 90%;
@@ -291,20 +293,32 @@ body {
     }
     main {
       grid-template-columns: 50% 10% 40%;
+
       .logo {
         height: auto;
         width: 100%;
         grid-column: 3/4;
       }
 
-      .buttons button {
-        font-size: 1.2rem;
-        padding: 0.5rem 1rem;
+      .heroText {
+        .buttons {
+          width: 100%;
+          display: flex;
+          gap: 0;
+          justify-content: space-between;
+
+          button {
+            font-size: 1.5rem;
+            padding: 1rem 1.2rem;
+          }
+        }
       }
     }
   }
+}
 
-  @media (max-width: $breakpoint-mobile) {
+@media (max-width: $breakpoint-mobile) {
+  #fakeHero {
     main {
       grid-template-columns: 100%;
       .logo {
@@ -410,6 +424,30 @@ body {
       font-weight: 600;
       white-space: nowrap;
     }
+  }
+}
+
+.globalTooltip {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  z-index: 2;
+
+  color: $primary;
+  font-size: 1.2rem;
+  font-weight: 500;
+
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 7px;
+
+  transform-origin: left center;
+  transform: translateY(0);
+
+  transition: all 0.5s ease-in-out;
+
+  &.hide {
+    transform: translateY(10vh);
   }
 }
 

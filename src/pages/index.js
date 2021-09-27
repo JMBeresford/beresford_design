@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '../styles/main.scss';
 import Scene from '../components/scene/';
 import { Helmet } from 'react-helmet';
-import useStore from '../components/scene/store';
 
 const IndexPage = () => {
-  const setTouchCoords = useStore((state) => state.setTouchCoords);
-
   const handlePointerMove = (e) => {
     let el = document.querySelector('.cursor');
 
@@ -16,18 +13,7 @@ const IndexPage = () => {
     }
   };
 
-  const handleTouch = (e) => {
-    console.log(e);
-
-    if (e.touches.length === 1) {
-      let x = e.touches[0].clientX;
-      let y = e.touches[0].clientY;
-
-      setTouchCoords(x, y);
-    }
-  };
-
-  const desc = `Beresford Design is a creative web design agency based in California. Stand out from the crowd and template generated websites with a bespoke digital masterpiece from Beresford Design.`;
+  const desc = `Beresford Design is a creative web design and development company based in California. Stand out from the crowd and template generated websites with a bespoke digital masterpiece from Beresford Design.`;
 
   return (
     <>
@@ -47,11 +33,7 @@ const IndexPage = () => {
         <meta name='theme-color' content='#ff9e9e' />
       </Helmet>
       <div id='index'>
-        <main
-          id='hero'
-          onPointerMove={handlePointerMove}
-          onTouchMove={handleTouch}
-        >
+        <main id='hero' onPointerMove={handlePointerMove}>
           <Scene />
         </main>
       </div>
