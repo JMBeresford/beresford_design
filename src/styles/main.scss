@@ -105,6 +105,14 @@ body {
   }
 }
 
+.disappear {
+  animation-name: loadingOut;
+  animation-duration: 1s;
+  animation-delay: 1.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
 @media (max-width: $breakpoint-tablet) {
   .loadingScreen {
     padding: 15% 0;
@@ -146,6 +154,7 @@ body {
   100% {
     opacity: 0;
     pointer-events: none;
+    display: none;
   }
 }
 
@@ -424,6 +433,89 @@ body {
       font-weight: 600;
       white-space: nowrap;
     }
+  }
+}
+
+.caseStudy {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  cursor: default;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: $secondary;
+
+  h1 {
+    font-family: fonts.$serif;
+    font-size: clamp(3rem, 3vw + 1rem, 5rem);
+  }
+
+  .head {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: 85%;
+    height: 10%;
+
+    transition: gap 0.2s ease-in-out;
+
+    &:hover {
+      gap: 1rem;
+    }
+  }
+
+  main {
+    width: 85%;
+    max-width: 1500px;
+  }
+
+  &.in {
+    animation-name: case-in;
+    animation-duration: 1s;
+    animation-delay: 1.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+  }
+
+  &.out {
+    animation-name: case-out;
+    animation-duration: 1s;
+    animation-delay: 0;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+  }
+}
+
+@keyframes case-in {
+  0% {
+    pointer-events: none;
+  }
+  1% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+@keyframes case-out {
+  0% {
+    pointer-events: all;
+    opacity: 1;
+  }
+
+  99% {
+    opacity: 0;
+  }
+
+  100% {
+    pointer-events: none;
   }
 }
 

@@ -53,6 +53,9 @@ export default function Model({ videos, ...props }) {
   const instagramRef = useRef();
   const linkedInRef = useRef();
   const githubRef = useRef();
+  const case1Ref = useRef();
+  const case2Ref = useRef();
+  const case3Ref = useRef();
 
   const setLoaded = useStore((state) => state.setLoaded);
   const setView = useStore((state) => state.setView);
@@ -92,8 +95,9 @@ export default function Model({ videos, ...props }) {
 
   // pointer event handlers
   const case1Clicked = (e) => {
+    console.log(e);
     if (view === 'case1') {
-      return;
+      setView('caseStudy1');
     } else {
       setView('case1');
     }
@@ -213,6 +217,80 @@ export default function Model({ videos, ...props }) {
   // EFFECTS
   useEffect(() => {
     setLoaded();
+
+    useStore.subscribe(
+      (view) => {
+        switch (view) {
+          case 'caseStudy1': {
+            document.querySelector('.cursorWrapper').style.display = 'none';
+
+            gsap.to(case1Ref.current.material, {
+              duration: 1,
+              opacity: 0,
+              ease: Power1.easeIn,
+            });
+            break;
+          }
+          case 'caseStudy2': {
+            document.querySelector('.cursorWrapper').style.display = 'none';
+
+            gsap.to(case2Ref.current.material, {
+              duration: 1,
+              opacity: 0,
+              ease: Power1.easeIn,
+            });
+            break;
+          }
+          case 'caseStudy3': {
+            document.querySelector('.cursorWrapper').style.display = 'none';
+
+            gsap.to(case3Ref.current.material, {
+              duration: 1,
+              opacity: 0,
+              ease: Power1.easeIn,
+            });
+            break;
+          }
+          case 'case1': {
+            document.querySelector('.cursorWrapper').style.display = 'block';
+
+            gsap.to(case1Ref.current.material, {
+              delay: 1.5,
+              duration: 1,
+              opacity: 1,
+              ease: Power1.easeOut,
+            });
+            break;
+          }
+          case 'case2': {
+            document.querySelector('.cursorWrapper').style.display = 'block';
+
+            gsap.to(case1Ref.current.material, {
+              delay: 1.5,
+              duration: 1,
+              opacity: 1,
+              ease: Power1.easeOut,
+            });
+            break;
+          }
+          case 'case3': {
+            document.querySelector('.cursorWrapper').style.display = 'block';
+
+            gsap.to(case1Ref.current.material, {
+              delay: 1.5,
+              duration: 1,
+              opacity: 1,
+              ease: Power1.easeOut,
+            });
+            break;
+          }
+          default: {
+            return;
+          }
+        }
+      },
+      (state) => state.view
+    );
   }, []);
 
   useEffect(() => {
@@ -276,6 +354,7 @@ export default function Model({ videos, ...props }) {
         onPointerOut={(e) => handlePointerOut(e)}
         onClick={case1Clicked}
         userData={{ name: 'case1', tooltip: 'Case Study: Beresford Design' }}
+        ref={case1Ref}
       >
         <meshBasicMaterial>
           <videoTexture
@@ -295,6 +374,7 @@ export default function Model({ videos, ...props }) {
         onPointerOut={(e) => handlePointerOut(e)}
         onClick={case2Clicked}
         userData={{ name: 'case2', tooltip: 'Case Study: TBA' }}
+        ref={case2Ref}
       >
         <meshBasicMaterial>
           <videoTexture
@@ -314,6 +394,7 @@ export default function Model({ videos, ...props }) {
         onPointerOut={(e) => handlePointerOut(e)}
         onClick={case3Clicked}
         userData={{ name: 'case3', tooltip: 'Case Study: TBA' }}
+        ref={case3Ref}
       >
         <meshBasicMaterial>
           <videoTexture

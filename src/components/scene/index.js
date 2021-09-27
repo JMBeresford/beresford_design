@@ -10,12 +10,13 @@ import screenVid from '../../video/screenVid.mp4';
 import bdPreview from '../../video/beresfordDesignPreview.mp4';
 import { Stats } from '@react-three/drei';
 import Tooltip from '../Tooltip';
+import Case1 from './cases/Case1';
 
 const Scene = () => {
   const pixelRatio =
     typeof window !== 'undefined' ? window.devicePixelRatio : 1;
 
-  const setView = useStore((state) => state.setView);
+  const goBack = useStore((state) => state.goBack);
   const experienceStarted = useStore((state) => state.experienceStarted);
 
   const vids = {
@@ -74,7 +75,7 @@ const Scene = () => {
                   .classList.remove('mobile');
               }
               if (!el.classList.contains('hovering') && experienceStarted) {
-                setView('main');
+                goBack();
               }
             }}
             onPointerMove={(e) => {
@@ -90,13 +91,14 @@ const Scene = () => {
                 !el.classList.contains('hovering') === undefined &&
                 experienceStarted
               ) {
-                setView('main');
+                goBack();
               }
             }}
             videos={vids}
           />
         </Suspense>
       </Canvas>
+      <Case1 />
       <Tooltip />
     </>
   );

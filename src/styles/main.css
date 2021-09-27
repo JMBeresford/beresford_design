@@ -114,6 +114,19 @@ body {
           animation-fill-mode: forwards;
 }
 
+.disappear {
+  -webkit-animation-name: loadingOut;
+          animation-name: loadingOut;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-delay: 1.5s;
+          animation-delay: 1.5s;
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
 @media (max-width: 1200px) {
   .loadingScreen {
     padding: 15% 0;
@@ -168,6 +181,7 @@ body {
   100% {
     opacity: 0;
     pointer-events: none;
+    display: none;
   }
 }
 @keyframes loadingOut {
@@ -186,6 +200,7 @@ body {
   100% {
     opacity: 0;
     pointer-events: none;
+    display: none;
   }
 }
 #fakeHero {
@@ -460,6 +475,123 @@ body {
   white-space: nowrap;
 }
 
+.caseStudy {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  cursor: default;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #34252f;
+}
+.caseStudy h1 {
+  font-family: orpheuspro, serif;
+  font-size: clamp(3rem, 3vw + 1rem, 5rem);
+}
+.caseStudy .head {
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0;
+  width: 85%;
+  height: 10%;
+  -webkit-transition: gap 0.2s ease-in-out;
+  transition: gap 0.2s ease-in-out;
+}
+.caseStudy .head:hover {
+  gap: 1rem;
+}
+.caseStudy main {
+  width: 85%;
+  max-width: 1500px;
+}
+.caseStudy.in {
+  -webkit-animation-name: case-in;
+          animation-name: case-in;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-delay: 1.5s;
+          animation-delay: 1.5s;
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+.caseStudy.out {
+  -webkit-animation-name: case-out;
+          animation-name: case-out;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+  -webkit-animation-delay: 0;
+          animation-delay: 0;
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes case-in {
+  0% {
+    pointer-events: none;
+  }
+  1% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+@keyframes case-in {
+  0% {
+    pointer-events: none;
+  }
+  1% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+@-webkit-keyframes case-out {
+  0% {
+    pointer-events: all;
+    opacity: 1;
+  }
+  99% {
+    opacity: 0;
+  }
+  100% {
+    pointer-events: none;
+  }
+}
+@keyframes case-out {
+  0% {
+    pointer-events: all;
+    opacity: 1;
+  }
+  99% {
+    opacity: 0;
+  }
+  100% {
+    pointer-events: none;
+  }
+}
 .globalTooltip {
   position: absolute;
   bottom: 0.5rem;
