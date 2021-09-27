@@ -43,7 +43,9 @@ const Scene = () => {
 
   return (
     <>
-      <Stats showPanel={0} className='stats' />
+      {!process.env.GATSBY_PRODUCTION && (
+        <Stats showPanel={0} className='stats' />
+      )}
       <LoadingScreen />
       <FakeHero
         onTouchStart={() => {
