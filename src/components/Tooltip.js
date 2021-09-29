@@ -30,10 +30,10 @@ const Tooltip = () => {
         return `${action} on the tablet to see more`;
       }
       case 'case2': {
-        return `This project isn't ready to be shown, yet`;
+        return `This project isn't ready to be shown yet`;
       }
       case 'case3': {
-        return `This project isn't ready to be shown, yet`;
+        return `This project isn't ready to be shown yet`;
       }
       default: {
         return ``;

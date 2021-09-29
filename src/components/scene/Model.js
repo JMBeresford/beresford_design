@@ -353,7 +353,7 @@ export default function Model({ videos, ...props }) {
         onPointerEnter={(e) => handlePointerEnter(e)}
         onPointerOut={(e) => handlePointerOut(e)}
         onClick={case1Clicked}
-        userData={{ name: 'case1', tooltip: 'Case Study: Beresford Design' }}
+        userData={{ name: 'case1', tooltip: 'Project: Beresford Design' }}
         ref={case1Ref}
       >
         <meshBasicMaterial>
@@ -373,7 +373,7 @@ export default function Model({ videos, ...props }) {
         onPointerEnter={(e) => handlePointerEnter(e)}
         onPointerOut={(e) => handlePointerOut(e)}
         onClick={case2Clicked}
-        userData={{ name: 'case2', tooltip: 'Case Study: TBA' }}
+        userData={{ name: 'case2', tooltip: 'Project: TBA' }}
         ref={case2Ref}
       >
         <meshBasicMaterial>
@@ -393,7 +393,7 @@ export default function Model({ videos, ...props }) {
         onPointerEnter={(e) => handlePointerEnter(e)}
         onPointerOut={(e) => handlePointerOut(e)}
         onClick={case3Clicked}
-        userData={{ name: 'case3', tooltip: 'Case Study: TBA' }}
+        userData={{ name: 'case3', tooltip: 'Project: TBA' }}
         ref={case3Ref}
       >
         <meshBasicMaterial>

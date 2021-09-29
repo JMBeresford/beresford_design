@@ -480,7 +480,7 @@ body {
   inset: 0;
   opacity: 0;
   pointer-events: none;
-  cursor: default;
+  cursor: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -498,6 +498,17 @@ body {
   font-size: clamp(3rem, 3vw + 1rem, 5rem);
 }
 .caseStudy .head {
+  width: 85%;
+  max-width: 1500px;
+  height: 10%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.caseStudy .head .wrap {
   cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -506,17 +517,28 @@ body {
       -ms-flex-align: center;
           align-items: center;
   gap: 0;
-  width: 85%;
-  height: 10%;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
   -webkit-transition: gap 0.2s ease-in-out;
   transition: gap 0.2s ease-in-out;
 }
-.caseStudy .head:hover {
+.caseStudy .head .wrap:hover {
   gap: 1rem;
 }
 .caseStudy main {
   width: 85%;
   max-width: 1500px;
+}
+.caseStudy main h1 {
+  margin-bottom: 2rem;
+}
+.caseStudy main h3 {
+  font-family: proxima-nova, sans-serif;
+  font-weight: 300;
+  max-width: 65ch;
+  line-height: 1.5rem;
+  color: #606060;
 }
 .caseStudy.in {
   -webkit-animation-name: case-in;
@@ -546,50 +568,54 @@ body {
 @-webkit-keyframes case-in {
   0% {
     pointer-events: none;
-  }
-  1% {
+    touch-action: none;
     opacity: 0;
   }
   100% {
     opacity: 1;
     pointer-events: all;
+    touch-action: auto;
   }
 }
 
 @keyframes case-in {
   0% {
     pointer-events: none;
-  }
-  1% {
+    -ms-touch-action: none;
+        touch-action: none;
     opacity: 0;
   }
   100% {
     opacity: 1;
     pointer-events: all;
+    -ms-touch-action: auto;
+        touch-action: auto;
   }
 }
 @-webkit-keyframes case-out {
   0% {
     pointer-events: all;
+    touch-action: auto;
     opacity: 1;
   }
-  99% {
-    opacity: 0;
-  }
   100% {
+    opacity: 0;
     pointer-events: none;
+    touch-action: none;
   }
 }
 @keyframes case-out {
   0% {
     pointer-events: all;
+    -ms-touch-action: auto;
+        touch-action: auto;
     opacity: 1;
   }
-  99% {
-    opacity: 0;
-  }
   100% {
+    opacity: 0;
     pointer-events: none;
+    -ms-touch-action: none;
+        touch-action: none;
   }
 }
 .globalTooltip {
@@ -597,24 +623,128 @@ body {
   bottom: 0.5rem;
   left: 0.5rem;
   z-index: 2;
+  -webkit-filter: drop-shadow(10px 10px 25px #000000);
+          filter: drop-shadow(10px 10px 25px #000000);
+  opacity: 1;
   color: #f1f6f9;
-  font-size: 1.2rem;
+  font-size: clamp(1.2rem, 1.5vw + 1rem, 1.8rem);
   font-weight: 500;
   padding: 0.5rem 1rem;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 7px;
-  -webkit-transform-origin: left center;
-          transform-origin: left center;
-  -webkit-transform: translateY(0);
-          transform: translateY(0);
+  background-color: rgba(255, 255, 255, 0);
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
 }
 .globalTooltip.hide {
-  -webkit-transform: translateY(10vh);
-          transform: translateY(10vh);
+  opacity: 0;
 }
 
+.brand {
+  position: absolute;
+  color: #f1f6f9;
+  bottom: 4rem;
+  left: 4rem;
+  right: 2rem;
+  -webkit-filter: drop-shadow(10px 10px 10px #000000);
+          filter: drop-shadow(10px 10px 10px #000000);
+  -webkit-animation-name: brand;
+          animation-name: brand;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-timing-function: ease;
+          animation-timing-function: ease;
+  -webkit-animation-delay: 5s;
+          animation-delay: 5s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+.brand h1 {
+  font-size: clamp(3rem, 4vw + 1rem, 7rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  opacity: 0;
+  -webkit-animation-name: brand-text;
+          animation-name: brand-text;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+.brand h3 {
+  font-size: clamp(1.2rem, 1.5vw + 1rem, 1.8rem);
+  font-weight: 300;
+  opacity: 0;
+  -webkit-animation-name: brand-text;
+          animation-name: brand-text;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+  -webkit-animation-delay: 2s;
+          animation-delay: 2s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+@media (max-width: 1200px) {
+  .brand {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-animation-delay: 6.5s;
+            animation-delay: 6.5s;
+  }
+  .brand h1 {
+    -webkit-animation-delay: 2.5s;
+            animation-delay: 2.5s;
+  }
+  .brand h3 {
+    -webkit-animation-delay: 3.5s;
+            animation-delay: 3.5s;
+  }
+}
+@-webkit-keyframes brand-text {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes brand-text {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes brand {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes brand {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 @-webkit-keyframes cursorAnimation {
   0% {
     -webkit-backdrop-filter: blur(4px);
@@ -625,7 +755,6 @@ body {
             backdrop-filter: blur(6px);
   }
 }
-
 @keyframes cursorAnimation {
   0% {
     -webkit-backdrop-filter: blur(4px);

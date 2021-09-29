@@ -2,6 +2,8 @@ import React from 'react';
 import '../styles/main.scss';
 import Scene from '../components/scene/';
 import { Helmet } from 'react-helmet';
+import useStore from '../components/scene/store';
+import { useMediaQuery } from 'react-responsive';
 
 const IndexPage = () => {
   const handlePointerMove = (e) => {
@@ -12,6 +14,9 @@ const IndexPage = () => {
       document.querySelector('.cursorWrapper').style.left = `${e.clientX}px`;
     }
   };
+
+  const experienceStarted = useStore((state) => state.experienceStarted);
+  const isMobile = useMediaQuery({ maxWidth: '1200px' });
 
   const desc =
     'John Beresford is a multidisciplinary designer and developer based in California. ' +
@@ -38,6 +43,16 @@ const IndexPage = () => {
       <div id='index'>
         <main id='hero' onPointerMove={handlePointerMove}>
           <Scene />
+          {experienceStarted && (
+            <div className='brand'>
+              <h1>Beresford Design</h1>
+              {isMobile ? (
+                <h3>Tap to explore</h3>
+              ) : (
+                <h3>Use your mouse to explore</h3>
+              )}
+            </div>
+          )}
         </main>
       </div>
     </>

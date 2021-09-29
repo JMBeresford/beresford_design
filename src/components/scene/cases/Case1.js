@@ -12,8 +12,8 @@ const Case1 = () => {
 
   const description = `
 John Beresford is a multidisciplinary designer and developer based in California. \
-He crafts creative web exeperiences using a synthesis of 3D design and web UI/UX fundamentals. \
-Companies and individuals, alike, can stand out amongst the crowd with their bespoke digital experiences from Beresford Design.
+He crafts creative web experiences using a synthesis of 3D design and web UI/UX fundamentals. \
+Companies and individuals alike can stand out amongst the crowd with bespoke digital experiences from Beresford Design.
 `;
 
   return (
@@ -22,9 +22,11 @@ Companies and individuals, alike, can stand out amongst the crowd with their bes
       className={`caseStudy ${view === 'caseStudy1' ? 'in' : 'out'}`}
       ref={ref}
     >
-      <div className='head' onClick={goBack}>
-        <MdArrowBack size={'2.5rem'} />
-        <h3>Go Back</h3>
+      <div className='head'>
+        <div className='wrap' onClick={goBack}>
+          <MdArrowBack size={'2.5rem'} />
+          <h3>Go Back</h3>
+        </div>
       </div>
       <main>
         <h1>{title}</h1>
