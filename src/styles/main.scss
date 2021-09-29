@@ -546,6 +546,8 @@ body {
   z-index: 2;
   filter: drop-shadow(10px 10px 25px #000000);
   opacity: 1;
+  pointer-events: none;
+  touch-action: none;
 
   color: $primary;
   font-size: clamp(1.2rem, 1.5vw + 1rem, 1.8rem);
@@ -607,6 +609,7 @@ body {
   .brand {
     display: flex;
     flex-direction: column;
+    text-align: center;
 
     align-items: center;
 
