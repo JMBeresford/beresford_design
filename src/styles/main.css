@@ -498,7 +498,8 @@ body {
   font-size: clamp(3rem, 3vw + 1rem, 5rem);
 }
 .caseStudy .head {
-  width: 85%;
+  width: 100%;
+  padding: 0 7.5%;
   max-width: 1500px;
   height: 10%;
   display: -webkit-box;
@@ -507,6 +508,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  background-color: #f1f6f9;
 }
 .caseStudy .head .wrap {
   cursor: pointer;
@@ -527,18 +529,86 @@ body {
   gap: 1rem;
 }
 .caseStudy main {
-  width: 85%;
-  max-width: 1500px;
+  width: 100%;
+  display: grid;
+  grid-template-areas: ".    head    logo    ." ".    subhead logo    ." ".    links    logo    ." ".    article article .";
+  grid-template-columns: 7.5% 1fr 1fr 7.5%;
+  grid-template-rows: 15vh 1fr 2fr auto;
 }
 .caseStudy main h1 {
-  margin-bottom: 2rem;
+  grid-area: head;
+  align-self: center;
+  font-size: clamp(4rem, 4vw + 1rem, 7rem);
 }
 .caseStudy main h3 {
+  grid-area: subhead;
   font-family: proxima-nova, sans-serif;
   font-weight: 300;
   max-width: 65ch;
   line-height: 1.5rem;
+  margin: 1rem 0;
   color: #606060;
+}
+.caseStudy main img.logo {
+  grid-area: logo;
+  place-self: center;
+  max-height: 100%;
+  max-width: 100%;
+}
+.caseStudy main .links {
+  grid-area: links;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 2rem;
+  padding-top: 3rem;
+}
+.caseStudy main .links a {
+  text-decoration: none;
+  color: #34252f;
+  font-family: proxima-nova, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  position: relative;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  overflow: visible;
+}
+.caseStudy main .links a.disabled {
+  pointer-events: none;
+  -ms-touch-action: none;
+      touch-action: none;
+  cursor: not-allowed;
+  color: #acacac;
+}
+.caseStudy main .links a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 0.05em;
+  bottom: -2px;
+  left: 0;
+  background-color: #34252f;
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transform-origin: bottom right;
+          transform-origin: bottom right;
+  -webkit-transition: -webkit-transform 0.25s ease-out;
+  transition: -webkit-transform 0.25s ease-out;
+  transition: transform 0.25s ease-out;
+  transition: transform 0.25s ease-out, -webkit-transform 0.25s ease-out;
+  border-radius: 5px;
+}
+.caseStudy main .links a:hover::after {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
 }
 .caseStudy.in {
   -webkit-animation-name: case-in;
@@ -739,6 +809,8 @@ body {
   }
   100% {
     opacity: 0;
+    pointer-events: none;
+    touch-action: none;
   }
 }
 @keyframes brand {
@@ -747,6 +819,9 @@ body {
   }
   100% {
     opacity: 0;
+    pointer-events: none;
+    -ms-touch-action: none;
+        touch-action: none;
   }
 }
 @-webkit-keyframes cursorAnimation {

@@ -7,7 +7,7 @@ import { useGLTF, useTexture, shaderMaterial } from '@react-three/drei';
 import model from './beresford_design.glb';
 import useStore from './store';
 import { gsap, Power1 } from 'gsap';
-import { extend, useFrame } from '@react-three/fiber';
+import { addAfterEffect, extend, useFrame } from '@react-three/fiber';
 import { Color, sRGBEncoding } from 'three';
 import emissiveVertexShader from '../../shaders/emissiveCube/emissiveCube.vert';
 import emissiveFragmentShader from '../../shaders/emissiveCube/emissiveCube.frag';
@@ -21,6 +21,7 @@ import bake6 from '../../images/bakes/bake6.jpg';
 import bake7 from '../../images/bakes/bake7.jpg';
 import bake8 from '../../images/bakes/bake8.jpg';
 import { useMediaQuery } from 'react-responsive';
+import { Pane } from 'tweakpane';
 
 const EmissiveCubeMaterial = shaderMaterial(
   {
@@ -36,8 +37,8 @@ const EmissiveCubeMaterial = shaderMaterial(
 const LeafMaterial = shaderMaterial(
   {
     uTime: 0,
-    uOffset: Math.random(),
     uTexture: null,
+    uBottom: 0,
   },
   leafVertexShader,
   leafFragmentShader
@@ -56,6 +57,7 @@ export default function Model({ videos, ...props }) {
   const case1Ref = useRef();
   const case2Ref = useRef();
   const case3Ref = useRef();
+  const treeRef = useRef();
 
   const setLoaded = useStore((state) => state.setLoaded);
   const setView = useStore((state) => state.setView);
@@ -305,12 +307,33 @@ export default function Model({ videos, ...props }) {
   }, [experienceStarted, isMobile]);
 
   useFrame(({ clock }) => {
-    emailRef.current.material.uniforms.uTime.value = clock.elapsedTime;
-    instagramRef.current.material.uniforms.uTime.value =
-      clock.elapsedTime + 0.25;
-    linkedInRef.current.material.uniforms.uTime.value = clock.elapsedTime + 0.5;
-    githubRef.current.material.uniforms.uTime.value = clock.elapsedTime + 0.75;
+    if (emailRef.current) {
+      emailRef.current.material.uniforms.uTime.value = clock.elapsedTime;
+    }
+
+    if (instagramRef.current) {
+      instagramRef.current.material.uniforms.uTime.value = clock.elapsedTime;
+    }
+
+    if (linkedInRef.current) {
+      linkedInRef.current.material.uniforms.uTime.value = clock.elapsedTime;
+    }
+
+    if (githubRef.current) {
+      githubRef.current.material.uniforms.uTime.value = clock.elapsedTime;
+    }
+
+    if (treeRef.current) {
+      treeRef.current.material.uniforms.uTime.value = clock.elapsedTime;
+    }
   });
+
+  // debug
+  if (false && !process.env.GATSBY_PRODUCTION) {
+    const pane = new Pane();
+
+    const params = {};
+  }
 
   // LOAD GLTF
   const { nodes } = useGLTF(model);
@@ -500,6 +523,13 @@ export default function Model({ videos, ...props }) {
           uScale={1}
           uHovered={0}
         />
+      </mesh>
+      <mesh
+        geometry={nodes.tree.geometry}
+        position={[-0.22052, 0.86142, -1.00879]}
+        ref={treeRef}
+      >
+        <leafMaterial uTexture={bakedTex2} />
       </mesh>
       <mesh
         geometry={nodes.bake2.geometry}

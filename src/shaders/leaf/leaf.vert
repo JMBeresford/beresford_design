@@ -1,10 +1,16 @@
 uniform float uTime;
-uniform float uOffset;
 
 varying vec2 vUv;
 
 void main() {
   vUv = uv;
 
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  vec3 newPos = position;
+
+  float strength = sin(position.y) * 0.05;
+
+  newPos.x += strength * sin(uTime);
+  //newPos.y -= strength * sin(uTime) * position.x;
+
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(newPos, 1.0);
 }
