@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../styles/main.scss';
 import Scene from '../components/scene/';
 import { Helmet } from 'react-helmet';
@@ -22,6 +22,10 @@ const IndexPage = () => {
     'John Beresford is a multidisciplinary designer and developer based in California. ' +
     'He develops creative web exeperiences using a synthesis of 3D design and web UI/UX fundamentals.' +
     'Companies and individuals, alike, can stand out amongst the crowd with their bespoke digital experiences from Beresford Design.';
+
+  useEffect(() => {
+    console.log('render');
+  }, []);
 
   return (
     <>

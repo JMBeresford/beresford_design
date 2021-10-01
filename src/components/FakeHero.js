@@ -6,12 +6,10 @@ import logo from '../images/logo.svg';
 import { useMediaQuery } from 'react-responsive';
 
 const FakeHero = (props) => {
-  const [experienceStarted, startExperience, startExperienceMobile] = useStore(
-    (state) => [
-      state.experienceStarted,
-      state.startExperience,
-      state.startExperienceMobile,
-    ]
+  const experienceStarted = useStore((state) => state.experienceStarted);
+  const startExperience = useStore((state) => state.startExperience);
+  const startExperienceMobile = useStore(
+    (state) => state.startExperienceMobile
   );
 
   const isMobile = useMediaQuery({ maxWidth: '1200px' });
@@ -38,7 +36,9 @@ const FakeHero = (props) => {
     <div
       id='fakeHero'
       onWheel={delayInteractionUpdate}
-      style={experienceStarted ? { display: 'none' } : {}}
+      style={
+        experienceStarted ? { pointerEvents: 'none', touchAction: 'none' } : {}
+      }
       {...props}
     >
       <Header handleInteract={delayInteractionUpdate} />
