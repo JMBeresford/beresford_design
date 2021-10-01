@@ -17,7 +17,7 @@ He develops creative web experiences using a synthesis of 3D design and web UI/U
 Companies and individuals alike can stand out amongst the crowd with bespoke digital experiences from Beresford Design.
 `;
 
-  const link = 'http://beresford_design.com/';
+  const link = 'http://beresford-design.com/';
   const github = 'http://github.com/JMBeresford/beresford_design/';
   const caseStudy = null;
 
@@ -38,11 +38,23 @@ Companies and individuals alike can stand out amongst the crowd with bespoke dig
         <h3>{description}</h3>
         <img src={logo} alt='beresford design logo' className='logo' />
         <div className='links'>
-          <a href={link} className={link ? '' : 'disabled'}>
+          <a
+            href={link}
+            target='_blank'
+            rel='noopener noreferrer'
+            className={link ? '' : 'disabled'}
+          >
             Live Project
           </a>
-          <a href={github}>Source Code</a>
-          <a href={caseStudy} className={caseStudy ? '' : 'disabled'}>
+          <a href={github} target='_blank' rel='noopener noreferrer'>
+            Source Code
+          </a>
+          <a
+            href={caseStudy}
+            target='_blank'
+            rel='noopener noreferrer'
+            className={caseStudy ? '' : 'disabled'}
+          >
             Case Study
           </a>
         </div>

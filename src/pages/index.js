@@ -43,16 +43,14 @@ const IndexPage = () => {
       <div id='index'>
         <main id='hero' onPointerMove={handlePointerMove}>
           <Scene />
-          {experienceStarted && (
-            <div className='brand'>
-              <h1>Beresford Design</h1>
-              {isMobile ? (
-                <h3>Tap to explore</h3>
-              ) : (
-                <h3>Use your mouse to explore</h3>
-              )}
-            </div>
-          )}
+          <div className={experienceStarted ? 'brand in' : 'brand'}>
+            <h1>Beresford Design</h1>
+            {isMobile ? (
+              <h3>Tap to explore</h3>
+            ) : (
+              <h3>Use your mouse to explore</h3>
+            )}
+          </div>
         </main>
       </div>
     </>

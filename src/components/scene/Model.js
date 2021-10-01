@@ -62,7 +62,6 @@ export default function Model({ videos, ...props }) {
   const setLoaded = useStore((state) => state.setLoaded);
   const setView = useStore((state) => state.setView);
   const view = useStore((state) => state.view);
-  const experienceStarted = useStore((state) => state.experienceStarted);
 
   const isMobile = useMediaQuery({ maxWidth: '1200px' });
 
@@ -293,18 +292,21 @@ export default function Model({ videos, ...props }) {
       },
       (state) => state.view
     );
-  }, []);
 
-  useEffect(() => {
-    if (!isMobile && experienceStarted) {
-      gsap.to(monitor.current.material, {
-        duration: 1.5,
-        opacity: 1,
-        ease: Power1.easeOut,
-        delay: 1,
-      });
-    }
-  }, [experienceStarted, isMobile]);
+    useStore.subscribe(
+      (experienceStarted) => {
+        if (experienceStarted) {
+          gsap.to(monitor.current.material, {
+            duration: 1.5,
+            opacity: 1,
+            ease: Power1.easeOut,
+            delay: 1,
+          });
+        }
+      },
+      (state) => state.experienceStarted
+    );
+  }, []);
 
   useFrame(({ clock }) => {
     if (emailRef.current) {

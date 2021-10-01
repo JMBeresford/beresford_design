@@ -54,7 +54,7 @@ const Scene = () => {
           el.classList.add('mobile');
         }}
       />
-      {<Cursor />}
+      <Cursor />
       <Canvas
         id='heroCanvas'
         dpr={Math.min(pixelRatio, 2)}

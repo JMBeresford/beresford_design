@@ -441,12 +441,14 @@ body {
   inset: 0;
   opacity: 0;
   pointer-events: none;
+  touch-action: none;
   cursor: auto;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
+  background-color: $primary;
   color: $secondary;
 
   h1 {
@@ -455,13 +457,11 @@ body {
   }
 
   .head {
-    width: 100%;
-    padding: 0 7.5%;
+    width: 85%;
     max-width: 1500px;
     height: 10%;
     display: flex;
     align-items: center;
-    background-color: $primary;
 
     .wrap {
       cursor: pointer;
@@ -479,17 +479,17 @@ body {
   }
 
   main {
-    width: 100%;
+    width: 85%;
+    max-width: 1500px;
     display: grid;
 
     grid-template-areas:
-      '.    head    logo    .'
-      '.    subhead logo    .'
-      '.    links    logo    .'
-      '.    article article .';
+      'head    logo'
+      'subhead logo'
+      'links    logo';
 
-    grid-template-columns: 7.5% 1fr 1fr 7.5%;
-    grid-template-rows: 15vh 1fr 2fr auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
 
     h1 {
       grid-area: head;
@@ -566,7 +566,7 @@ body {
     animation-name: case-in;
     animation-duration: 1s;
     animation-delay: 1.5s;
-    animation-timing-function: ease-out;
+    animation-timing-function: ease-in;
     animation-fill-mode: forwards;
   }
 
@@ -576,6 +576,33 @@ body {
     animation-delay: 0;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
+  }
+}
+
+@media (max-width: 1200px) {
+  .caseStudy {
+    .head {
+      .wrap:hover {
+        gap: 0;
+      }
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      padding: 0 7.5vw;
+      height: 90%;
+
+      img.logo {
+        display: none;
+      }
+
+      .links {
+        flex-direction: row;
+        gap: 1;
+      }
+    }
   }
 }
 
@@ -595,8 +622,6 @@ body {
 
 @keyframes case-out {
   0% {
-    pointer-events: all;
-    touch-action: auto;
     opacity: 1;
   }
 
@@ -638,19 +663,13 @@ body {
   left: 4rem;
   right: 2rem;
 
-  filter: drop-shadow(10px 10px 10px #000000);
+  filter: drop-shadow(5px 5px 5px #000000);
 
   h1 {
     font-size: clamp(3rem, 4vw + 1rem, 7rem);
     font-weight: 700;
     margin-bottom: 1rem;
     opacity: 0;
-
-    animation-name: brand-text;
-    animation-duration: 2s;
-    animation-timing-function: ease-out;
-    animation-delay: 1s;
-    animation-fill-mode: forwards;
   }
 
   h3 {
@@ -658,19 +677,31 @@ body {
 
     font-weight: 300;
     opacity: 0;
-
-    animation-name: brand-text;
-    animation-duration: 2s;
-    animation-timing-function: ease-out;
-    animation-delay: 2s;
-    animation-fill-mode: forwards;
   }
 
-  animation-name: brand;
-  animation-duration: 2s;
-  animation-timing-function: ease;
-  animation-delay: 5s;
-  animation-fill-mode: forwards;
+  &.in {
+    animation-name: brand;
+    animation-duration: 2s;
+    animation-timing-function: ease;
+    animation-delay: 5s;
+    animation-fill-mode: forwards;
+
+    h1 {
+      animation-name: brand-text;
+      animation-duration: 2s;
+      animation-timing-function: ease-out;
+      animation-delay: 1s;
+      animation-fill-mode: forwards;
+    }
+
+    h3 {
+      animation-name: brand-text;
+      animation-duration: 2s;
+      animation-timing-function: ease-out;
+      animation-delay: 2s;
+      animation-fill-mode: forwards;
+    }
+  }
 }
 
 @media (max-width: $breakpoint-tablet) {
@@ -678,17 +709,19 @@ body {
     display: flex;
     flex-direction: column;
     text-align: center;
+    left: 1rem;
+    right: 1rem;
 
     align-items: center;
 
     animation-delay: 6.5s;
 
     h1 {
-      animation-delay: 2.5s;
+      animation-delay: 3.5s;
     }
 
     h3 {
-      animation-delay: 3.5s;
+      animation-delay: 4.5s;
     }
   }
 }

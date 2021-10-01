@@ -480,6 +480,8 @@ body {
   inset: 0;
   opacity: 0;
   pointer-events: none;
+  -ms-touch-action: none;
+      touch-action: none;
   cursor: auto;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -491,6 +493,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  background-color: #f1f6f9;
   color: #34252f;
 }
 .caseStudy h1 {
@@ -498,8 +501,7 @@ body {
   font-size: clamp(3rem, 3vw + 1rem, 5rem);
 }
 .caseStudy .head {
-  width: 100%;
-  padding: 0 7.5%;
+  width: 85%;
   max-width: 1500px;
   height: 10%;
   display: -webkit-box;
@@ -508,7 +510,6 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: #f1f6f9;
 }
 .caseStudy .head .wrap {
   cursor: pointer;
@@ -529,11 +530,12 @@ body {
   gap: 1rem;
 }
 .caseStudy main {
-  width: 100%;
+  width: 85%;
+  max-width: 1500px;
   display: grid;
-  grid-template-areas: ".    head    logo    ." ".    subhead logo    ." ".    links    logo    ." ".    article article .";
-  grid-template-columns: 7.5% 1fr 1fr 7.5%;
-  grid-template-rows: 15vh 1fr 2fr auto;
+  grid-template-areas: "head    logo" "subhead logo" "links    logo";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
 }
 .caseStudy main h1 {
   grid-area: head;
@@ -617,8 +619,8 @@ body {
           animation-duration: 1s;
   -webkit-animation-delay: 1.5s;
           animation-delay: 1.5s;
-  -webkit-animation-timing-function: ease-out;
-          animation-timing-function: ease-out;
+  -webkit-animation-timing-function: ease-in;
+          animation-timing-function: ease-in;
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
 }
@@ -635,6 +637,35 @@ body {
           animation-fill-mode: forwards;
 }
 
+@media (max-width: 1200px) {
+  .caseStudy .head .wrap:hover {
+    gap: 0;
+  }
+  .caseStudy main {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+    padding: 0 7.5vw;
+    height: 90%;
+  }
+  .caseStudy main img.logo {
+    display: none;
+  }
+  .caseStudy main .links {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    gap: 1;
+  }
+}
 @-webkit-keyframes case-in {
   0% {
     pointer-events: none;
@@ -647,7 +678,6 @@ body {
     touch-action: auto;
   }
 }
-
 @keyframes case-in {
   0% {
     pointer-events: none;
@@ -664,8 +694,6 @@ body {
 }
 @-webkit-keyframes case-out {
   0% {
-    pointer-events: all;
-    touch-action: auto;
     opacity: 1;
   }
   100% {
@@ -676,9 +704,6 @@ body {
 }
 @keyframes case-out {
   0% {
-    pointer-events: all;
-    -ms-touch-action: auto;
-        touch-action: auto;
     opacity: 1;
   }
   100% {
@@ -717,8 +742,21 @@ body {
   bottom: 4rem;
   left: 4rem;
   right: 2rem;
-  -webkit-filter: drop-shadow(10px 10px 10px #000000);
-          filter: drop-shadow(10px 10px 10px #000000);
+  -webkit-filter: drop-shadow(5px 5px 5px #000000);
+          filter: drop-shadow(5px 5px 5px #000000);
+}
+.brand h1 {
+  font-size: clamp(3rem, 4vw + 1rem, 7rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  opacity: 0;
+}
+.brand h3 {
+  font-size: clamp(1.2rem, 1.5vw + 1rem, 1.8rem);
+  font-weight: 300;
+  opacity: 0;
+}
+.brand.in {
   -webkit-animation-name: brand;
           animation-name: brand;
   -webkit-animation-duration: 2s;
@@ -730,11 +768,7 @@ body {
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
 }
-.brand h1 {
-  font-size: clamp(3rem, 4vw + 1rem, 7rem);
-  font-weight: 700;
-  margin-bottom: 1rem;
-  opacity: 0;
+.brand.in h1 {
   -webkit-animation-name: brand-text;
           animation-name: brand-text;
   -webkit-animation-duration: 2s;
@@ -746,10 +780,7 @@ body {
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
 }
-.brand h3 {
-  font-size: clamp(1.2rem, 1.5vw + 1rem, 1.8rem);
-  font-weight: 300;
-  opacity: 0;
+.brand.in h3 {
   -webkit-animation-name: brand-text;
           animation-name: brand-text;
   -webkit-animation-duration: 2s;
@@ -772,6 +803,8 @@ body {
         -ms-flex-direction: column;
             flex-direction: column;
     text-align: center;
+    left: 1rem;
+    right: 1rem;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
@@ -779,12 +812,12 @@ body {
             animation-delay: 6.5s;
   }
   .brand h1 {
-    -webkit-animation-delay: 2.5s;
-            animation-delay: 2.5s;
-  }
-  .brand h3 {
     -webkit-animation-delay: 3.5s;
             animation-delay: 3.5s;
+  }
+  .brand h3 {
+    -webkit-animation-delay: 4.5s;
+            animation-delay: 4.5s;
   }
 }
 @-webkit-keyframes brand-text {
