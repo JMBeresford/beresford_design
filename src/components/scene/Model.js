@@ -61,6 +61,8 @@ export default function Model({ videos, ...props }) {
 
   const setLoaded = useStore((state) => state.setLoaded);
   const setView = useStore((state) => state.setView);
+  const setPos = useStore((state) => state.setPos);
+  const setRotation = useStore((state) => state.setRotation);
   const view = useStore((state) => state.view);
 
   const isMobile = useMediaQuery({ maxWidth: '1200px' });
@@ -95,8 +97,12 @@ export default function Model({ videos, ...props }) {
   };
 
   // pointer event handlers
+  const deskClicked = (e) => {
+    if (!isMobile) {
+      setView('desk');
+    }
+  };
   const case1Clicked = (e) => {
-    console.log(e);
     if (view === 'case1') {
       setView('caseStudy1');
     } else {
@@ -165,6 +171,11 @@ export default function Model({ videos, ...props }) {
       cursor.classList.add('socials');
       cursor.classList.add('hovering');
       tooltip.textContent = 'Social Media';
+    } else if (mesh.userData.name === 'desk') {
+      if (view === 'desk') return;
+
+      cursor.classList.add('hovering');
+      cursor.classList.add('notip');
     } else {
       cursor.classList.add(mesh.userData.name);
       cursor.classList.add('hovering');
@@ -198,6 +209,7 @@ export default function Model({ videos, ...props }) {
     } else {
       cursor.classList.remove(mesh.userData.name);
       cursor.classList.remove('hovering');
+      cursor.classList.remove('notip');
     }
 
     if (view === 'socials' && mesh.userData.cube) {
@@ -331,10 +343,37 @@ export default function Model({ videos, ...props }) {
   });
 
   // debug
-  if (false && !process.env.GATSBY_PRODUCTION) {
+  if (!process.env.GATSBY_PRODUCTION) {
     const pane = new Pane();
 
-    const params = {};
+    const params = {
+      position: { x: 0, y: 0, z: 0 },
+      rotation: { x: 0, y: 0, z: 0 },
+    };
+
+    pane
+      .addInput(params, 'position', {
+        x: { step: 0.01 },
+        y: { step: 0.01 },
+        z: { step: 0.01 },
+      })
+      .on('change', (e) => {
+        let pos = e.value;
+
+        setPos([pos.x, pos.y, pos.z]);
+      });
+
+    pane
+      .addInput(params, 'rotation', {
+        x: { step: 0.01 },
+        y: { step: 0.01 },
+        z: { step: 0.01 },
+      })
+      .on('change', (e) => {
+        let r = e.value;
+
+        setRotation([r.x, r.y, r.z]);
+      });
   }
 
   // LOAD GLTF
@@ -352,12 +391,19 @@ export default function Model({ videos, ...props }) {
         geometry={nodes.phone_emissive.geometry}
         position={[0.01893, 0.78195, -0.80597]}
       >
-        <meshBasicMaterial opacity={0} />
+        <meshBasicMaterial
+          opacity={isMobile ? 0 : 1}
+          color={isMobile ? null : 'black'}
+        />
       </mesh>
       <mesh
         geometry={nodes.monitor_emissive.geometry}
         position={[0.34019, 1.12988, -0.91913]}
         ref={monitor}
+        onPointerEnter={handlePointerEnter}
+        onPointerLeave={handlePointerOut}
+        onClick={deskClicked}
+        userData={{ name: 'desk' }}
       >
         <meshBasicMaterial opacity={0}>
           {isMobile ? null : (
@@ -376,7 +422,7 @@ export default function Model({ videos, ...props }) {
         geometry={nodes.ipad_emissive001.geometry}
         position={[-1.33327, 1.38233, -0.77324]}
         onPointerEnter={(e) => handlePointerEnter(e)}
-        onPointerOut={(e) => handlePointerOut(e)}
+        onPointerLeave={(e) => handlePointerOut(e)}
         onClick={case1Clicked}
         userData={{ name: 'case1', tooltip: 'Project: Beresford Design' }}
         ref={case1Ref}
@@ -396,7 +442,7 @@ export default function Model({ videos, ...props }) {
         geometry={nodes.ipad_emissive002.geometry}
         position={[-0.90973, 0.98622, -0.77324]}
         onPointerEnter={(e) => handlePointerEnter(e)}
-        onPointerOut={(e) => handlePointerOut(e)}
+        onPointerLeave={(e) => handlePointerOut(e)}
         onClick={case2Clicked}
         userData={{ name: 'case2', tooltip: 'Project: TBA' }}
         ref={case2Ref}
@@ -416,7 +462,7 @@ export default function Model({ videos, ...props }) {
         geometry={nodes.ipad_emissive.geometry}
         position={[-1.33327, 0.6179, -0.77324]}
         onPointerEnter={(e) => handlePointerEnter(e)}
-        onPointerOut={(e) => handlePointerOut(e)}
+        onPointerLeave={(e) => handlePointerOut(e)}
         onClick={case3Clicked}
         userData={{ name: 'case3', tooltip: 'Project: TBA' }}
         ref={case3Ref}
@@ -436,7 +482,7 @@ export default function Model({ videos, ...props }) {
         geometry={nodes.email_emissive.geometry}
         position={[-1.54201, 1.74999, -0.82321]}
         onPointerEnter={(e) => handlePointerEnter(e)}
-        onPointerOut={(e) => handlePointerOut(e)}
+        onPointerLeave={(e) => handlePointerOut(e)}
         onClick={emailClicked}
         userData={{
           name: 'email',
@@ -455,7 +501,7 @@ export default function Model({ videos, ...props }) {
         geometry={nodes.insta_emissive.geometry}
         position={[-1.2595, 1.74999, -0.82434]}
         onPointerEnter={(e) => handlePointerEnter(e)}
-        onPointerOut={(e) => handlePointerOut(e)}
+        onPointerLeave={(e) => handlePointerOut(e)}
         onClick={instaClicked}
         userData={{ name: 'instagram', cube: true, tooltip: 'Instagram' }}
         ref={instagramRef}
@@ -470,7 +516,7 @@ export default function Model({ videos, ...props }) {
         geometry={nodes.linkedin_emissive.geometry}
         position={[-0.9821, 1.74999, -0.82434]}
         onPointerEnter={(e) => handlePointerEnter(e)}
-        onPointerOut={(e) => handlePointerOut(e)}
+        onPointerLeave={(e) => handlePointerOut(e)}
         onClick={linkedinClicked}
         userData={{ name: 'linkedIn', cube: true, tooltip: 'LinkedIn' }}
         ref={linkedInRef}
@@ -515,7 +561,7 @@ export default function Model({ videos, ...props }) {
         geometry={nodes.github_emissive.geometry}
         position={[-0.70014, 1.74999, -0.82434]}
         onPointerEnter={(e) => handlePointerEnter(e)}
-        onPointerOut={(e) => handlePointerOut(e)}
+        onPointerLeave={(e) => handlePointerOut(e)}
         onClick={githubClicked}
         userData={{ name: 'github', cube: true, tooltip: 'GitHub' }}
         ref={githubRef}
@@ -536,6 +582,10 @@ export default function Model({ videos, ...props }) {
       <mesh
         geometry={nodes.bake2.geometry}
         position={[0.99771, 0.87454, -1.053]}
+        onPointerEnter={handlePointerEnter}
+        onPointerLeave={handlePointerOut}
+        onClick={deskClicked}
+        userData={{ name: 'desk' }}
       >
         <meshBasicMaterial map={bakedTex2} transparent />
       </mesh>

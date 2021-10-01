@@ -385,6 +385,12 @@ body {
     }
   }
 
+  &.notip {
+    ~ .tooltip {
+      transform: scaleX(0) scaleY(0) translateY(-50%);
+    }
+  }
+
   .ripple {
     position: absolute;
     border-radius: 50%;

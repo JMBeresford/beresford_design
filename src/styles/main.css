@@ -429,6 +429,10 @@ body {
   -webkit-transform: scaleX(1) scaleY(1) translateY(-50%);
           transform: scaleX(1) scaleY(1) translateY(-50%);
 }
+.cursor.notip ~ .tooltip {
+  -webkit-transform: scaleX(0) scaleY(0) translateY(-50%);
+          transform: scaleX(0) scaleY(0) translateY(-50%);
+}
 .cursor .ripple {
   position: absolute;
   border-radius: 50%;

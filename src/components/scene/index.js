@@ -18,6 +18,7 @@ const Scene = () => {
 
   const goBack = useStore((state) => state.goBack);
   const experienceStarted = useStore((state) => state.experienceStarted);
+  const setCamera = useStore((state) => state.setCamera);
 
   const vids = {
     idleScreen: null,
@@ -62,6 +63,7 @@ const Scene = () => {
         gl={{ alpha: true }}
         onCreated={(state) => {
           state.gl.setClearAlpha('#f1f6f9');
+          setCamera(state.camera);
         }}
       >
         <Camera fov={60} near={0.01} far={10} />

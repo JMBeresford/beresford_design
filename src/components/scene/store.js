@@ -1,6 +1,20 @@
 import create from 'zustand';
 
 const store = (set, get) => ({
+  camera: null,
+  setCamera: (cam) => {
+    set({ camera: cam });
+  },
+  setPos: (pos) => {
+    let camera = get().camera;
+
+    camera.position.set(...pos);
+  },
+  setRotation: (r) => {
+    let camera = get().camera;
+
+    camera.rotation.set(...r);
+  },
   prevView: 'main',
   setPrevView: (view) => {
     set({ prevView: view });
@@ -20,9 +34,12 @@ const store = (set, get) => ({
         set({ prevView: 'case2' });
         break;
       }
-      case 'caseStudy1': {
+      case 'caseStudy3': {
         set({ prevView: 'case3' });
         break;
+      }
+      case 'desk': {
+        set({ prevView: 'main' });
       }
       default: {
         set({ prevView: 'main' });

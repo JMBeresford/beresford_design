@@ -57,6 +57,10 @@ const Camera = (props) => {
           position: [0.34019, 1.12988, -0.72],
           rotation: [0, 0, 0],
         },
+        desk: {
+          position: [0.32, 1.13, -0.14],
+          rotation: [-0.22, 0, 0],
+        },
         main: {
           position: [0, 1.4, 1.5],
           rotation: [-0.23608012159022193, 0, 0],
