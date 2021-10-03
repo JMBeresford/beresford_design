@@ -1,0 +1,9 @@
+@use '../colors' as *;
+@use '../fonts' as *;
+
+#loading {
+  position: fixed;
+  inset: 0;
+
+  background-color: red;
+}
