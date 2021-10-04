@@ -1,0 +1,80 @@
+@use '../colors' as *;
+@use '../fonts' as *;
+@use '../utils' as *;
+@use 'sass:color';
+
+#landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 7;
+  width: $fluid;
+  height: 100%;
+  cursor: default;
+
+  font: $serif;
+  color: $secondary;
+
+  main {
+    height: 90%;
+
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 20% 60% 20%;
+
+    .heroText {
+      align-self: center;
+      grid-row: 2/3;
+      grid-column: 1/2;
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
+
+      h1 {
+        font-size: clamp(3rem, 3vw + 1rem, 5rem);
+        max-width: 45ch;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 2rem;
+
+        button {
+          font-size: 1.5rem;
+          font: $sans-serif;
+          padding: 1rem 2.5rem;
+          border-radius: 5px;
+          cursor: pointer;
+
+          border: 2px $accent-blue solid;
+          color: $accent-blue;
+          background-color: rgba(255, 255, 255, 0);
+
+          transition: all ease-in-out 0.1s;
+
+          &:hover {
+            background-color: rgb(255, 255, 255, 0.5);
+          }
+        }
+
+        button.mainBtn {
+          border: none;
+          background-color: $accent-blue;
+
+          color: $primary;
+
+          &:hover {
+            background-color: color.adjust($accent-blue, $lightness: 10%);
+          }
+        }
+      }
+    }
+
+    .logo {
+      grid-row: 2/3;
+      grid-column: 2/3;
+      place-self: center end;
+      height: 100%;
+    }
+  }
+}
