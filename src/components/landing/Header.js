@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import logo from '../../img/logo.svg';
-import useStore from '../../store';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const isSmallMobile = useMediaQuery({ maxWidth: '760px' });
@@ -16,9 +16,15 @@ const Header = () => {
 
       <nav>
         <ul>
-          <li>about</li>
-          <li>contact</li>
-          <li>works</li>
+          <li>
+            <Link to='/about'>about</Link>
+          </li>
+          <li>
+            <Link to='/contact'>contact</Link>
+          </li>
+          <li>
+            <Link to='experience'>works</Link>
+          </li>
         </ul>
       </nav>
     </header>

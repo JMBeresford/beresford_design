@@ -1,24 +1,22 @@
 import React from 'react';
 import Header from './Header';
-import logo from '../../img/logo.svg';
+import Hero from './Hero';
+import HeroImage from './HeroImage';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 const Landing = () => {
   return (
-    <div id='landing'>
-      <Header />
-      <main>
-        <div className='heroText'>
-          <h1>
-            Stand out from the competition with a bespoke digital masterpiece.
-          </h1>
-          <div className='buttons'>
-            <button className='mainBtn'>Our Work</button>
-            <button>Get Yours</button>
-          </div>
-        </div>
-        <img className='logo' src={logo} alt='Beresford Design Logo' />
-      </main>
-    </div>
+    <Router>
+      <div id='landing'>
+        <HeroImage />
+        <Header />
+        <Switch>
+          <Route path='/'>
+            <Hero />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 };
 

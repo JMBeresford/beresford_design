@@ -2,6 +2,7 @@
 #loading {
   position: fixed;
   inset: 0;
+  z-index: 10;
   background-color: #f1f6f9;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -215,13 +216,72 @@
           align-items: center;
   z-index: 7;
   width: clamp(300px, 85%, 1500px);
+  height: 100%;
   cursor: default;
   font: orpheuspro, serif;
   color: #34252f;
 }
+#landing main#hero {
+  height: 90%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 20% 60% 20%;
+}
+#landing main#hero .heroText {
+  align-self: center;
+  grid-row: 2/3;
+  grid-column: 1/2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 5rem;
+}
+#landing main#hero .heroText h1 {
+  font-size: clamp(3rem, 3vw + 1rem, 5rem);
+  max-width: 45ch;
+}
+#landing main#hero .heroText .buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2rem;
+}
+#landing main#hero .heroText .buttons button {
+  font-size: 1.5rem;
+  font: proxima-nove, sans-serif;
+  padding: 1rem 2.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 2px #2374ab solid;
+  color: #2374ab;
+  background-color: rgba(255, 255, 255, 0);
+  -webkit-transition: all ease-in-out 0.1s;
+  transition: all ease-in-out 0.1s;
+}
+#landing main#hero .heroText .buttons button:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+#landing main#hero .heroText .buttons button.mainBtn {
+  border: none;
+  background-color: #2374ab;
+  color: #f1f6f9;
+}
+#landing main#hero .heroText .buttons button.mainBtn:hover {
+  background-color: #2d90d4;
+}
+#landing main#hero .logo {
+  grid-row: 2/3;
+  grid-column: 2/3;
+  place-self: center end;
+  height: 100%;
+}
 
 header#header {
-  width: clamp(300px, 85%, 1500px);
+  width: 100%;
   height: 10%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -255,16 +315,20 @@ header#header ul {
           justify-content: space-between;
   list-style-type: none;
 }
-header#header ul li {
+header#header ul li a {
   cursor: pointer;
   position: relative;
+  text-decoration: none;
+  color: #34252f;
+  font-family: orpheuspro, serif;
+  font-size: 1.1rem;
 }
-header#header ul li::after {
+header#header ul li a::after {
   content: "";
   position: absolute;
   width: 100%;
   height: 0.05rem;
-  bottom: -2px;
+  bottom: 0;
   left: 0;
   background-color: #34252f;
   -webkit-transform: scaleX(0);
@@ -277,7 +341,7 @@ header#header ul li::after {
   transition: transform 0.25s ease-out, -webkit-transform 0.25s ease-out;
   border-radius: 50%;
 }
-header#header ul li:hover::after {
+header#header ul li a:hover::after {
   -webkit-transform: scaleX(1);
           transform: scaleX(1);
   -webkit-transform-origin: bottom left;
@@ -312,7 +376,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: vh;
+  height: 100vh;
 }
 
 /*# sourceMappingURL=index.css.map */
