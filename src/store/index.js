@@ -1,11 +1,13 @@
 import create from 'zustand';
 import createCameraSlice from './camera';
-import { Clock } from 'three';
+import { Clock, Vector2 } from 'three';
+import { Pane } from 'tweakpane';
 
 const useStore = create((set, get) => ({
   isLoaded: false,
   isMobile: false,
   time: new Clock(false),
+  globalMouse: new Vector2(0, 0),
 
   // store slices
   camera: {
@@ -19,6 +21,9 @@ const useStore = create((set, get) => ({
   },
   loaded: () => {
     set({ loaded: true });
+  },
+  debug: {
+    pane: process.env.GATSBY_PRODUCTION ? null : new Pane(),
   },
 }));
 

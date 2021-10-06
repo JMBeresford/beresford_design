@@ -3,7 +3,7 @@
 @use 'loading/loading';
 @use 'landing/landing';
 @use 'landing/header';
-@use 'hero/heroImage';
+@use 'sass:color';
 
 :root {
   font-size: 16px;
@@ -20,6 +20,9 @@ body {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+
+  background-color: color.adjust($secondary, $saturation: -20%);
+  color: $primary;
 }
 
 .App {

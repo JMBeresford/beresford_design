@@ -218,6 +218,7 @@
   width: clamp(300px, 85%, 1500px);
   height: 100%;
   cursor: default;
+  position: relative;
   font: orpheuspro, serif;
   color: #34252f;
 }
@@ -226,6 +227,7 @@
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: 20% 60% 20%;
+  z-index: 5;
 }
 #landing main#hero .heroText {
   align-self: center;
@@ -243,6 +245,7 @@
 #landing main#hero .heroText h1 {
   font-size: clamp(3rem, 3vw + 1rem, 5rem);
   max-width: 45ch;
+  color: #f1f6f9;
 }
 #landing main#hero .heroText .buttons {
   display: -webkit-box;
@@ -263,7 +266,7 @@
   transition: all ease-in-out 0.1s;
 }
 #landing main#hero .heroText .buttons button:hover {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 #landing main#hero .heroText .buttons button.mainBtn {
   border: none;
@@ -273,11 +276,12 @@
 #landing main#hero .heroText .buttons button.mainBtn:hover {
   background-color: #2d90d4;
 }
-#landing main#hero .logo {
-  grid-row: 2/3;
+#landing main#hero .heroScene {
+  grid-row: 1/4;
   grid-column: 2/3;
   place-self: center end;
   height: 100%;
+  width: 100%;
 }
 
 header#header {
@@ -292,6 +296,8 @@ header#header {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  z-index: 5;
+  color: #f1f6f9;
 }
 header#header img {
   max-height: 60%;
@@ -319,7 +325,7 @@ header#header ul li a {
   cursor: pointer;
   position: relative;
   text-decoration: none;
-  color: #34252f;
+  color: #f1f6f9;
   font-family: orpheuspro, serif;
   font-size: 1.1rem;
 }
@@ -330,7 +336,7 @@ header#header ul li a::after {
   height: 0.05rem;
   bottom: 0;
   left: 0;
-  background-color: #34252f;
+  background-color: #f1f6f9;
   -webkit-transform: scaleX(0);
           transform: scaleX(0);
   -webkit-transform-origin: bottom right;
@@ -363,6 +369,8 @@ body {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  background-color: #2d2d2d;
+  color: #f1f6f9;
 }
 
 .App {

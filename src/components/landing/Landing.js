@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from './Header';
 import Hero from './Hero';
-import HeroImage from './HeroImage';
+import HeroScene from './HeroScene';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import useStore from '../../store';
 
 const Landing = () => {
   return (
     <Router>
       <div id='landing'>
-        <HeroImage />
         <Header />
-        <Switch>
-          <Route path='/'>
-            <Hero />
-          </Route>
-        </Switch>
+        <main id='hero'>
+          <HeroScene />
+          <Switch>
+            <Route path='/'>
+              <Hero />
+            </Route>
+          </Switch>
+        </main>
       </div>
     </Router>
   );
