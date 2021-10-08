@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import logo from '../../img/logo.svg';
-import { Link } from 'react-router-dom';
+import { Link } from 'gatsby';
 
 const Header = () => {
   const isSmallMobile = useMediaQuery({ maxWidth: '760px' });
