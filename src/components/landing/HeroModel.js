@@ -134,12 +134,14 @@ export default function Model(props) {
       repeat: -1,
       yoyo: true,
     });
+  }, []);
 
+  useEffect(() => {
     pointsRef.current.geometry.setAttribute(
       'aOffset',
       new BufferAttribute(aOffset, 1)
     );
-  }, []);
+  }, [aOffset]);
 
   useFrame(({ clock }) => {
     pointsRef.current.material.uniforms.uTime.value = clock.elapsedTime;

@@ -23,7 +23,7 @@ const useStore = create((set, get) => ({
     set({ loaded: true });
   },
   debug: {
-    pane: process.env.GATSBY_PRODUCTION ? null : new Pane(),
+    pane: undefined,
   },
 }));
 
