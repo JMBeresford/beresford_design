@@ -21,7 +21,8 @@ body {
   width: 100vw;
   overflow: hidden;
 
-  background-color: color.adjust($secondary, $saturation: -20%);
+  background-color: $secondary;
+
   color: $primary;
 }
 
@@ -31,4 +32,9 @@ body {
   align-items: center;
 
   height: 100vh;
+}
+
+// debug panel
+.tp-dfwv {
+  z-index: 100;
 }

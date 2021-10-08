@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import Header from './Header';
-import Hero from './Hero';
 import HeroScene from './HeroScene';
+import Header from './Header';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import useStore from '../../store';
 
@@ -10,12 +9,10 @@ const Landing = () => {
     <Router>
       <div id='landing'>
         <Header />
+        <HeroScene />
         <main id='hero'>
-          <HeroScene />
           <Switch>
-            <Route path='/'>
-              <Hero />
-            </Route>
+            <Route path='/'></Route>
           </Switch>
         </main>
       </div>

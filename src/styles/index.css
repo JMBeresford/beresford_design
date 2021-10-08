@@ -222,66 +222,24 @@
   font: orpheuspro, serif;
   color: #34252f;
 }
+#landing .heroScene {
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+}
 #landing main#hero {
-  height: 90%;
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: 20% 60% 20%;
+  height: 100%;
+  padding-top: 5%;
   z-index: 5;
 }
-#landing main#hero .heroText {
-  align-self: center;
-  grid-row: 2/3;
-  grid-column: 1/2;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  gap: 5rem;
-}
-#landing main#hero .heroText h1 {
-  font-size: clamp(3rem, 3vw + 1rem, 5rem);
-  max-width: 45ch;
+#landing main#hero h1 {
+  text-align: center;
+  font-size: clamp(3rem, 7vw + 1rem, 10rem);
+  font-family: proxima-nove, sans-serif;
   color: #f1f6f9;
-}
-#landing main#hero .heroText .buttons {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 2rem;
-}
-#landing main#hero .heroText .buttons button {
-  font-size: 1.5rem;
-  font: proxima-nove, sans-serif;
-  padding: 1rem 2.5rem;
-  border-radius: 5px;
-  cursor: pointer;
-  border: 2px #2374ab solid;
-  color: #2374ab;
-  background-color: rgba(255, 255, 255, 0);
-  -webkit-transition: all ease-in-out 0.1s;
-  transition: all ease-in-out 0.1s;
-}
-#landing main#hero .heroText .buttons button:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-#landing main#hero .heroText .buttons button.mainBtn {
-  border: none;
-  background-color: #2374ab;
-  color: #f1f6f9;
-}
-#landing main#hero .heroText .buttons button.mainBtn:hover {
-  background-color: #2d90d4;
-}
-#landing main#hero .heroScene {
-  grid-row: 1/4;
-  grid-column: 2/3;
-  place-self: center end;
-  height: 100%;
-  width: 100%;
+  pointer-events: all;
+  cursor: auto;
+  letter-spacing: 4px;
 }
 
 header#header {
@@ -369,7 +327,7 @@ body {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  background-color: #2d2d2d;
+  background-color: #34252f;
   color: #f1f6f9;
 }
 
@@ -385,6 +343,10 @@ body {
       -ms-flex-align: center;
           align-items: center;
   height: 100vh;
+}
+
+.tp-dfwv {
+  z-index: 100;
 }
 
 /*# sourceMappingURL=index.css.map */
