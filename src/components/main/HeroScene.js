@@ -1,31 +1,20 @@
 import React, { Suspense, useEffect, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Stats, OrbitControls, Stars } from '@react-three/drei';
-import HeroModel from './HeroModel';
+import { Stats, OrbitControls, Stars, useDetectGPU } from '@react-three/drei';
+import HeroModel from './3d/HeroModel';
+import Sky from './3d/Sky';
 
 const HeroScene = () => {
-  const pixelRatio =
-    typeof window !== 'undefined' ? window.devicePixelRatio : 1;
+  var pixelRatio = typeof window !== 'undefined' ? window.devicePixelRatio : 1;
+
+  const GPU = useDetectGPU();
+
+  if (GPU.tier < 3) {
+    pixelRatio = 1;
+  }
 
   const camRef = useRef();
   const controls = useRef();
-
-  const Sky = () => {
-    const stars = useRef();
-
-    useEffect(() => {
-      stars.current.rotation.reorder('YXZ');
-    }, []);
-
-    useFrame(({ clock }) => {
-      stars.current.rotation.y =
-        Math.sin(clock.elapsedTime * 0.002) * Math.PI * 2;
-      stars.current.rotation.x =
-        Math.sin(clock.elapsedTime * 0.0013) * Math.PI * -2;
-    });
-
-    return <Stars saturation={50} factor={4} ref={stars} fade={false} />;
-  };
 
   return (
     <div className='heroScene'>
@@ -47,7 +36,7 @@ const HeroScene = () => {
       >
         <Suspense fallback={null}>
           <HeroModel />
-          <Sky />
+          <Sky position={[0, 0, -20]} />
         </Suspense>
         <Stats />
         {/* <OrbitControls camera={camRef.current} ref={controls} /> */}

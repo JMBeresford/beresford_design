@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import HeroScene from './HeroScene';
 import Header from './Header';
 import useStore from '../../store';
 
-const Landing = () => {
+const Main = () => {
   return (
     <div id='landing'>
       <Header />
-      <HeroScene />
-      <main id='hero'></main>
+      <Suspense fallback={null}>
+        <HeroScene />
+      </Suspense>
     </div>
   );
 };
 
-export default Landing;
+export default Main;
