@@ -61,3 +61,11 @@ header#header {
     }
   }
 }
+
+@media (max-width: 760px) {
+  header#header {
+    nav {
+      width: 80%;
+    }
+  }
+}

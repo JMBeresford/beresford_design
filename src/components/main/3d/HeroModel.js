@@ -19,6 +19,7 @@ import {
   Vector2,
   FloatType,
   AdditiveBlending,
+  NormalBlending,
 } from 'three';
 import { gsap, Power1 } from 'gsap';
 import pointsVertexShader from '../../../shaders/points/vertex.glsl';
@@ -40,7 +41,7 @@ const PointsMaterial = shaderMaterial(
     shaderMaterial.vertexColors = true;
     shaderMaterial.transparent = true;
     shaderMaterial.depthWrite = false;
-    shaderMaterial.blending = AdditiveBlending;
+    shaderMaterial.blending = NormalBlending;
   }
 );
 
@@ -83,7 +84,7 @@ export default function Model(props) {
     let offset = Math.random();
     aOffset[i] = offset;
 
-    let color = Math.random() > 0.5 ? '#ffe6e6' : '#c0def2';
+    let color = Math.random() > 0.5 ? '#ff9e9e' : '#c0def2';
 
     points.push(
       <Point
