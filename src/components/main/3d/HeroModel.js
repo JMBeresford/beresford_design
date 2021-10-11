@@ -17,8 +17,8 @@ import {
   BufferAttribute,
   sRGBEncoding,
   Vector2,
-  NormalBlending,
   FloatType,
+  AdditiveBlending,
 } from 'three';
 import { gsap, Power1 } from 'gsap';
 import pointsVertexShader from '../../../shaders/points/vertex.glsl';
@@ -40,7 +40,7 @@ const PointsMaterial = shaderMaterial(
     shaderMaterial.vertexColors = true;
     shaderMaterial.transparent = true;
     shaderMaterial.depthWrite = false;
-    shaderMaterial.blending = NormalBlending;
+    shaderMaterial.blending = AdditiveBlending;
   }
 );
 

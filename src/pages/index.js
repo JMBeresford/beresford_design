@@ -7,7 +7,7 @@ global.XMLHttpRequest = require('xhr2');
 function Index() {
   return (
     <div className='App'>
-      <Loading />
+      {/* <Loading /> */}
       <Main />
     </div>
   );

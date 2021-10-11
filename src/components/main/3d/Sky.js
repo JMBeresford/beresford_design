@@ -6,7 +6,13 @@ import skyFragmentShader from '../../../shaders/sky/fragment.glsl';
 import { Vector2, Color } from 'three';
 
 const SkyMaterial = shaderMaterial(
-  { uTime: 0, uResolution: new Vector2(0, 0), uColor: new Color(1, 0, 0) },
+  {
+    uTime: 0,
+    uResolution: new Vector2(0, 0),
+    uColor: new Color(1, 0, 0),
+    uColor2: new Color(1, 0, 0),
+    uColor3: new Color(1, 0, 0),
+  },
   skyVertexShader,
   skyFragmentShader
 );
@@ -24,7 +30,12 @@ const Sky = (props) => {
   return (
     <mesh ref={ref} {...props}>
       <planeGeometry args={[200, 200]} />
-      <skyMaterial uColor={'#34252f'} uResolution={[size.width, size.height]} />
+      <skyMaterial
+        uColor={'#00090f'}
+        uColor2={'#001524'}
+        uColor3={'#ff9e9e'}
+        uResolution={[size.width, size.height]}
+      />
     </mesh>
   );
 };

@@ -15,7 +15,7 @@ void main() {
 
   float radius = 15.0 * exp(-0.85 * timeMod) * sin(PI * 0.1 * timeMod);
 
-  radius *= 3.0;
+  radius *= 2.5;
 
   newPosition.x = cos(uTime * position.x) * radius;
   newPosition.y = (timeMod - 0.6) * 5.0;
@@ -28,8 +28,8 @@ void main() {
 
   vColor = color;
 
-  gl_PointSize = 750.0;
+  gl_PointSize = 1000.0 * aOffset;
 
   // size attenuation
-  gl_PointSize *= (1.0 / - viewPosition.z);
+  gl_PointSize *= (5.0 / - viewPosition.z);
 }
