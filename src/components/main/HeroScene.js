@@ -10,7 +10,7 @@ const HeroScene = () => {
   const GPU = useDetectGPU();
 
   if (GPU.tier < 3) {
-    //pixelRatio = 1;
+    pixelRatio = 1;
   }
 
   const camRef = useRef();
