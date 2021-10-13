@@ -145,8 +145,11 @@ export default function Model(props) {
     );
   }, [aOffset]);
 
-  useFrame(({ clock }) => {
+  useFrame(({ clock, mouse }) => {
     pointsRef.current.material.uniforms.uTime.value = clock.elapsedTime;
+
+    //group.current.rotation.x += mouse.y * 0.1;
+    //group.current.rotation.y += mouse.x * 0.1;
   });
 
   const { nodes } = useGLTF(model);

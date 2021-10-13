@@ -12,6 +12,7 @@ const SkyMaterial = shaderMaterial(
     uColor: new Color(1, 0, 0),
     uColor2: new Color(1, 0, 0),
     uColor3: new Color(1, 0, 0),
+    uColor4: new Color(1, 0, 0),
   },
   skyVertexShader,
   skyFragmentShader
@@ -34,6 +35,7 @@ const Sky = (props) => {
         uColor={'#00090f'}
         uColor2={'#001524'}
         uColor3={'#ff9e9e'}
+        uColor4={'#000e24'}
         uResolution={[size.width, size.height]}
       />
     </mesh>

@@ -2,6 +2,7 @@ uniform float uTime;
 uniform vec3 uColor;
 uniform vec3 uColor2;
 uniform vec3 uColor3;
+uniform vec3 uColor4;
 uniform vec2 uResolution;
 
 #pragma glslify: snoise3 = require(glsl-noise/simplex/3d)
@@ -71,7 +72,10 @@ void main() {
   vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution) / uResolution.xy;
   uv.y = (uv.y + 0.5) * 0.5;
 
-  float noise = snoise3(vec3(uv * 2.0, uTime * 0.02));
+  float noise = clamp(snoise3(vec3(uv * 2.0, uTime * 0.02)), 0.0, 1.0);
+
+  float antiNoise = 1.0 - abs(noise);
+  antiNoise = smoothstep(0.0, 0.9,pow(antiNoise, 5.0));
   
   float distort = cnoise3(vec3(uv * 2.0, uTime * 0.05));
 
@@ -81,8 +85,11 @@ void main() {
 
   vec3 stars = starLayer(uv * 500.0 + sin(uTime * 0.01), uColor3) * smoothstep(.05,.5,noise) * shadow;
   stars += starLayer(uv * 40.0, uColor3) * smoothstep(0.5, 1.0, noise) * shadow;
+
+  stars += starLayer(uv * 500.0 + cos(uTime * 0.01), vec3(0.7,0.65,1.0)) * smoothstep(0.05, 0.5, antiNoise) * shadow;
   
-  vec3 clouds = uColor2 * smoothstep(0.2, 0.9, noise);
+  vec3 clouds = uColor2 * smoothstep(0.0, 0.9, noise) * shadow;
+  clouds += uColor4 * smoothstep(0.0, 0.9, antiNoise) * shadow;
   stars += clouds;
 
   color += abs(stars);
